@@ -6,7 +6,7 @@ Photon *hw;
 ofstream debug_file;
 string ModelBuild_file;
 double w;
-bool debug = true;
+bool debug = false;
 /************************************* Main Code **********************************/
 int main(int argc, char* argv[])
 {
