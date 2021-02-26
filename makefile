@@ -12,7 +12,7 @@ DEPS = $(optprop_dep) $(mathlib_dep) MCRT_library.h
 ODIR = obj
 
 # compiling instructions
-CC = g++ -std=c++11 -fopenmp
+CC = g++ -std=c++11 -fopenmp -g
 CFLAGS = -I$(mathlib_lib) -I$(optprop_lib) -I.
 
 # object files
@@ -40,13 +40,25 @@ $(ODIR)/materials.o: $(optprop_lib)/materials.cpp $(optprop_dep) $(mathlib_dep)
 
 # 2. compile rest of the objects
 $(ODIR)/%.o: %.cpp $(DEPS)
+	$(shell [ ! -d $(@D) ] && mkdir -p $(@D))
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 .PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o
+	rm -rf $(ODIR) mc_photon
 
 all:
 	@echo $(DEPS)
 	@echo $(OBJ)
+
+MKDIR_P = mkdir -p
+
+.PHONY: directories
+
+all: directories program
+
+directories: ${ODIR}
+
+${ODIR}:
+	${MKDIR_P} ${ODIR}
