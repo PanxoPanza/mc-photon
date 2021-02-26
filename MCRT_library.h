@@ -28,6 +28,7 @@
 #define RandomNum (double) RandomGen(1, 0, NULL)
 #define SIGN(x) ((x)>=0 ? 1:-1)
 #define InitRandomGen (double) RandomGen(0, 1.0, NULL)
+#define MAX_REFLECTION 1e4
 
 #define PA_DOUBLE  0
 #define PA_INT     1

@@ -745,7 +745,7 @@ bool ModelBuild::IsPhotonTrapped(Photon *hw, const int IsReflected) const
 		if (hw->NumReflects > 0 && newRegionLabel.compare(hw->oldRegionLabel) == 0) {
 			hw->NumReflects++;
 			hw->oldRegionLabel = newRegionLabel; // record region
-			if (hw->NumReflects > 1E5) { // 1E5 consecutive internal reflections or scattering events
+			if (hw->NumReflects > MAX_REFLECTION) { // consecutive internal reflections or scattering events
 				hw->NumReflects = 0;
 				return true;
 			}

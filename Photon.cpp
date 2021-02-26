@@ -386,11 +386,12 @@ std::string Photon::Print(void) const {
 	outstring += "	Region =	" + PhotonRegion->Label + "\n";
 	outstring += "	PathLengths (um):\n";
 	outstring += "		Boundary	=	" + Length[0].str() + "\n";
-	outstring += "		Surface	=	" + Length[1].str() + "\n";
-	outstring += "		Monitor	=	" + Length[2].str() + "\n";
+	outstring += "		Surface		=	" + Length[1].str() + "\n";
+	outstring += "		Monitor		=	" + Length[2].str() + "\n";
 	outstring += "		Extinction	=	" + Length[3].str() + "\n";
 	outstring += "		Particle	=	" + Length[4].str() + "\n";
-	outstring += "		Travel Dist.=	" + Length[5].str() + "\n";
+	outstring += "		Travel Dist.	=	" + Length[5].str() + "\n";
+	outstring += "		R. Count	=	" + to_string(NumReflects) + "\n";
 	outstring += "	IsAlive =	" + to_string(Alive) + "\n";
 	return outstring;
 }
