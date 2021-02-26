@@ -305,12 +305,14 @@ int Mie_Inclusion::set_at_frequency(const double &w) {
 	}
 	frequency_set = true;
 
-	//Log("NPcon: %.4f",NPcon);
-	//Log("aCross: %.4f",aCross(w));
-	//Log("sCross: %.4f",sCross(w));
-	//Log("wMeanPathParticle: %.4f",wMeanPathParticle);
-	//Log("wScatAlbedo: %.4f",wScatAlbedo);
-	//Log("wgAsym: %.4f",wgAsym);
+	/*
+	Log("NPcon: %.4f",NPcon);
+	Log("mu_a (mm^-1): %.4f",NPcon*aCross(w));
+	Log("mu_s (mm^-1): %.4f",NPcon*sCross(w));
+	Log("wMeanPathParticle: %.4f",wMeanPathParticle);
+	Log("wScatAlbedo: %.4f",wScatAlbedo);
+	Log("wgAsym: %.4f",wgAsym);
+	*/
 	return 1;
 }
 
