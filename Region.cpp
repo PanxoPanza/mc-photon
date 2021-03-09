@@ -34,7 +34,12 @@ void RTRegion::Initialize()
 void RTRegion::CleanUp()
 {
 	if (Properties != NULL) delete Properties;
-	if (mie_particle != NULL) delete[] mie_particle;
+	if (mie_particle != NULL) {
+		for (int i = 0; i < Num_Inclusions; i++){
+			mie_particle[i].CleanUp();
+		}
+		//delete[] mie_particle;
+	}
 	Initialize();
 }
 
@@ -140,7 +145,7 @@ void RTRegion::reset_wProperties(void) {
 // sample the path length of all the particles and returns the minimum
 double RTRegion::NP_sample_path(int &i_np) {
 	double *NPlength = new double [Num_Inclusions];
-	double *i_particle = new double[Num_Inclusions];
+	double *i_particle = new double [Num_Inclusions];
 
 	for (int i = 0; i < Num_Inclusions; i++) {
 		if (mie_particle[i].is_scatter)

@@ -14,6 +14,7 @@ int main(int argc, char* argv[])
 	string debug_stream = "";
 
 	ModelBuild_file = check_command_line(argc, argv);
+	//ModelBuild_file = "H2O_catalyst_film";
 	ModelBuild Setup(ModelBuild_file);
 
 	if (debug) debug_file.open("debug_file.txt");

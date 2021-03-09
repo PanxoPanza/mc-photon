@@ -15,7 +15,6 @@ Mie_Inclusion::Mie_Inclusion(const string &str_inst, const string &xRegionLabel)
 
 Mie_Inclusion::~Mie_Inclusion(void) {
 	CleanUp();
-	Initialize();
 }
 
 void Mie_Inclusion::set_object(const string &str_inst, const string &xRegionLabel) {
@@ -65,6 +64,7 @@ void Mie_Inclusion::Initialize(void) {
 
 	MieFileOpen = false;
 	MieFile = "";
+	RegionLabel = "";
 	cosT.clear();
 
 	MieData = false;
@@ -95,8 +95,8 @@ void Mie_Inclusion::reset_wProperties(void) {
 }
 
 void Mie_Inclusion::CleanUp(void) {
+	Initialize();
 	if (fTheta != NULL) delete[] fTheta;
-
 }
 
 void Mie_Inclusion::Open_MieFile(string MieFileName[]) {
@@ -181,13 +181,10 @@ int Mie_Inclusion::Read_Data(ifstream &File) {
 	dvector wData, sData, aData, gData; // MieData
 	dvector Eps_data[2], Mu_data[2]; // Effective properties
 	dvector *ftData;
-	//double data;
 
-	// Extract mie data (cross sections in um^2)
-	ftData = new dvector[Ntheta];
+	// Extract scattering phase function
+	if (is_pDist_exat) ftData = new dvector[Ntheta];
 
-	// Allocate pointers
-	fTheta = new dataInterpol[Ntheta];
 	while (getline(File, line)) {
 		CommentOut(line); // remove comments
 		token = Tokenize(line); // tokenize considering " " - "\t" - "," characters
@@ -253,10 +250,12 @@ int Mie_Inclusion::Read_Data(ifstream &File) {
 		mu[1].set_points(wData, Mu_data[1]); Mu_data[1].clear();
 	}
 	if (is_pDist_exat) {
+		fTheta = new dataInterpol [Ntheta];
 		double *xcosT = linspace(-1, 1, Ntheta);
 		for (int it = 0; it < Ntheta; it++) {
 			cosT.push_back(xcosT[it]);
-			fTheta[it].set_points(wData, ftData[it]); ftData[it].clear();
+			fTheta[it].set_points(wData, ftData[it]); 
+			ftData[it].clear();
 		}
 		delete[] ftData;
 		delete[] xcosT;
@@ -305,14 +304,13 @@ int Mie_Inclusion::set_at_frequency(const double &w) {
 	}
 	frequency_set = true;
 
-	/*
 	Log("NPcon: %.4f",NPcon);
 	Log("mu_a (mm^-1): %.4f",NPcon*aCross(w));
 	Log("mu_s (mm^-1): %.4f",NPcon*sCross(w));
 	Log("wMeanPathParticle: %.4f",wMeanPathParticle);
 	Log("wScatAlbedo: %.4f",wScatAlbedo);
 	Log("wgAsym: %.4f",wgAsym);
-	*/
+	
 	return 1;
 }
 
