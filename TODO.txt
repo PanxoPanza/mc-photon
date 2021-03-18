@@ -1,0 +1,9 @@
+# TODO list
+- Eliminate REGION dependence in "Monitor" class
+- Kill photon after many scattering events in the same region
+- Fix code for correct parallel computing work
+- Change w units to microns
+- Change dimension units to mm
+- Warning msg for extrapolated values (Mie scattering and others).
+    "Warning extrapolated values at SOMEWAVELEGNTH in thefile.mie"
+- Accept files with .setup extension

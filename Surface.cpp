@@ -508,13 +508,13 @@ void RTMonitor::clean_y_data(void) {
 
 void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 	int iw;
-	double Tol = 1E-10;
+	double Tol = 1E-4;
 	int PanelID = hw->GetMonitorPanelID();
 	Vector3D k_hat = Panels[PanelID].GlobaltoLocal(hw->k_hat()); // photon momentum in local
 	Vector3D n_hat = Panels[PanelID].Normal(); // normal to monitor panel
 	double cosTheta = abs(n_hat.dot(k_hat)); // Theta: angle of incidence of photon
 	Point3D x0_loc = hw->x_MonitorHits(); // location where photon hits panel
-	int kz_sgn = k_hat.Z() > 0 ? 1 : -1; // +- direction of kz
+	int kz_sgn = SIGN(k_hat.Z()); // +- direction of kz
 
 	double MoveConst = abs(k_hat.Z()) < Tol ? 10 : abs(10 * Tol / k_hat.Z());
 	x0_loc.x += MoveConst * k_hat.X();

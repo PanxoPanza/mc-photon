@@ -1,4 +1,0 @@
-# Pending task for the code
-- Eliminate REGION dependence in "Monitor" class
-- Kill photon after many scattering events in the same region
-- Fix code for correct parallel computing work

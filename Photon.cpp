@@ -309,19 +309,20 @@ void Photon::NPscatter(void) {
 	w = w1;
 
 	// normal vector pointing to z direction
-	nz_hat.SetVector(0, 0, 1);
+	///nz_hat.SetVector(0, 0, 1);
 
 	// Get normal of the scattering plane
-	ns_hat = abs(nz_hat.dot(*Momentum)) == 1 ?
-						Vector3D(0, -1, 0) : nz_hat.cross(*Momentum);
-	ns_hat.normalize(); // normalize ns_hat
+	//ns_hat = abs(nz_hat.dot(*Momentum)) == 1 ?
+	//					Vector3D(0, -1, 0) : nz_hat.cross(*Momentum);
+	//ns_hat.normalize(); // normalize ns_hat
 
 	// get E-components respect to the scattering plane
-	double es = Polarization->dot(ns_hat);
+	//double es = Polarization->dot(ns_hat);
+	double es = RandomNum;
 	double ep = sqrt(1 - es*es);
 	new_e.SetVector(ep, es, 0); 		// save intial polarization
 
-	// save new values (update posstion at outside of the particle's surface)
+	// save new values (update postion outside of the particle's surface)
 	SetPosition(new_pos); 					// new position
 	SetMomentum(Vector3D(u, v, w)); // new momentum
 	SetPolarization(new_e); 				// new polarization

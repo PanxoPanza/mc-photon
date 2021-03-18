@@ -145,7 +145,6 @@ class Mie_Inclusion {
 private:
 	double fV; // particle's volume fraction
 	void Initialize();
-	void CleanUp();
 	int NumFreq; // Number of frequencies for mie-data
 
 	// code gets scattering properties
@@ -188,6 +187,7 @@ public:
 	Mie_Inclusion(void);
 	Mie_Inclusion(const string &str_inst, const string &RegionLabel);
 	~Mie_Inclusion(void);
+	void CleanUp(); // There is a memory leak when this function is kept private!!
 
 	void set_object(const string &str_inst, const string &RegionLabel);
 

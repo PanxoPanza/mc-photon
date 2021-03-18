@@ -32,6 +32,8 @@ void ModelBuild::Initiallize(void) {
 	Monitor = NULL;
 	Region = NULL;
 	Surface = NULL;
+	std_output = NULL;
+	
 	NumSurfaces = 0;
 	NumRegions = 0;
 	NumMonitors = 0;
@@ -517,7 +519,7 @@ void ModelBuild::BuildStdoutput(vector<InstrSet> &vMonitorSet, vector<InstrSet> 
 		};
 
 		// set upper monitor for reflectivity
-		MonitorSet[0] = { "GEOMETRY", 1, 1, "BOX_Z-OPEN(1E9,1E9,1E5) CENTER(0,0,+0.5E5)" };
+		MonitorSet[0] = { "GEOMETRY", 1, 1, "BOX_Z-OPEN(1E8,1E8,1E5) CENTER(0,0,+0.5E5)" };
 		MonitorSet[1] = { "FILENAME", 1, 1, "R_" + out_file.at(NumStdOut) };
 		MonitorSet[2] = { "REGIONS", 1,  1, "EXTERIOR EXTERIOR" };
 		MonitorSet[3] = { "PLOT_TYPE", 1,  1, "RADIATION PROPERTIES" };
@@ -529,7 +531,7 @@ void ModelBuild::BuildStdoutput(vector<InstrSet> &vMonitorSet, vector<InstrSet> 
 		vMonitorSet.push_back(MonitorSet[4]);
 
 		// set lower monitor for transmissivity
-		MonitorSet[0] = { "GEOMETRY", 1, 1, "BOX_Z+OPEN(1E9,1E9,1E5) CENTER(0,0,-0.5E5)" };
+		MonitorSet[0] = { "GEOMETRY", 1, 1, "BOX_Z+OPEN(1E8,1E8,1E5) CENTER(0,0,-0.5E5)" };
 		MonitorSet[1] = { "FILENAME", 1, 1, "T_" + out_file.at(NumStdOut) };
 		MonitorSet[2] = { "REGIONS", 1,  1, "EXTERIOR EXTERIOR" };
 		MonitorSet[3] = { "PLOT_TYPE", 1,  1, "RADIATION PROPERTIES" };
