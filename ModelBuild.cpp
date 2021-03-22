@@ -20,7 +20,8 @@ ModelBuild::ModelBuild(string setupfile) {
 	// check if file exist
 	Initiallize();
 	InputSetup(setupfile);
-	if (nThread != 0) omp_set_num_threads(nThread);
+	omp_set_num_threads(1); // Temporal (need to fix parallel computing)
+	//if (nThread != 0) omp_set_num_threads(nThread);
 }
 
 ModelBuild::~ModelBuild() {

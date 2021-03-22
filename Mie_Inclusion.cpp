@@ -79,6 +79,7 @@ void Mie_Inclusion::Initialize(void) {
 	is_pDist_exat = false;
 	Ntheta = 0;
 	cosT.clear();
+	fTheta = NULL;
 
 	reset_wProperties();
 }
