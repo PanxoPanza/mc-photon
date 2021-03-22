@@ -93,8 +93,7 @@ bool ModelBuild::Check_SetupFile(string &setup_FileName, ifstream &File) {
 	while (ask) {
 		i_ask++;
 
-		File.open(setup_FileName + ".setup"); // add file extension
-
+		File.open(setup_FileName + ".setup");
 		if (File.is_open()) {
 			Log("Setup file found: %s.setup", setup_FileName.c_str());
 			return true;
@@ -127,6 +126,12 @@ bool ModelBuild::Check_SetupFile(string &setup_FileName, ifstream &File) {
 void ModelBuild::InputSetup(string setupfile) {
 	ifstream File;
 	int Narg; // number of arguments for each class type
+
+	
+	// remove .setup extension
+	size_t found = setupfile.find(".setup");
+	if (found != string::npos)
+		setupfile.resize(found);
 
 	// set logfile
 	switch (OS_SYSTEM) {
