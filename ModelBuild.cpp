@@ -185,6 +185,7 @@ void ModelBuild::InputSetup(string setupfile) {
 	InstrSet OutputSet[] = {
 		{"RADIATION_PROP"	, 0, 1, "" },
 		{"THREADS"			, 0, 1, "" },
+		{"FILE_SUFIX"		, 0, 1, "" },
 		{"", 0, 0, ""}
 	};
 
@@ -551,9 +552,11 @@ void ModelBuild::BuildStdoutput(vector<InstrSet> &vMonitorSet, vector<InstrSet> 
 		NumStdOut++;;
 	}
 
-	if (!Value("THREADS", vOutputSet, 0, Ninst).empty()) {
+	if (!Value("THREADS", vOutputSet, 0, Ninst).empty())
 		nThread = (int)stod(Value("THREADS", vOutputSet, 0, Ninst));
-	}
+
+	file_sufix = Value("FILE_SUFIX", vOutputSet, 0, Ninst);
+
 	Log("... STANDARD OUTPUT: %i declarations found", NumStdOut);
 	if (NumStdOut > 0) {
 		std_output = new predef_output*[NumStdOut];
@@ -600,7 +603,8 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 		MonGeo = Value("GEOMETRY", vMonitorSet, i, Ninst);
 
 		// set output file
-		token = Tokenize(Value("FILENAME", vMonitorSet, i, Ninst)); oFile = token.front();
+		token = Tokenize(Value("FILENAME", vMonitorSet, i, Ninst)); 
+		oFile = token.front() + '_' + file_sufix;
 
 		// Get upper and lower regions
 		token = Tokenize(Value("REGIONS", vMonitorSet, i, Ninst));

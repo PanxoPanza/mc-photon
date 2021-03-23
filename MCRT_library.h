@@ -620,9 +620,6 @@ public:
 };
 
 class ModelBuild {
-public:
-	double meantest;
-
 private:
 	int nThread;
 	RTMonitor **Monitor;
@@ -634,6 +631,7 @@ private:
 	int NumRegions;
 	int NumMonitors;
 	int NumStdOut;
+	string file_sufix;
 
 	vector<InstrSet> ExtractData(ifstream &File,
 		InstrSet *objinst, const string &begobj, const string &endobj, int Nmax = 1E3);
@@ -653,6 +651,8 @@ private:
 	bool BuildObjects(const string &objName,const vector<InstrSet> &vOjectSet, InstrSet *Minobjinst,const int &Narg) const;
 
 public :
+	double meantest;
+
 	ModelBuild(string setupfile);
 	~ModelBuild();
 	void InputSetup(string setupfile);
