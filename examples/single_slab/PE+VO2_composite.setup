@@ -1,0 +1,67 @@
+// ***** Define the regions (Exterior is pre-defined) ***********
+REGION
+	LABEL		VO2_PE_mix
+	MATERIAL	EPS_FILE(PE_eps.txt)
+	INCLUSION	VOLFRAC(0.00550) MIEFILE(VO2_bar_ensemble)
+	INCLUSION	VOLFRAC(0.00100) MIEFILE(PE_haze)
+ENDREGION
+
+// **************** Define the surfaces *************************
+SURFACE
+	LABEL	  composite_film
+	REGIONS   EXTERIOR VO2_PE_mix
+	GEOMETRY  BOX( 50E3, 50E3, 73) CENTER( 0, 0, -36.50) // Units in um
+ENDSURFACE
+// **************** Define external source **********************
+ESOURCE
+	N_PHOTONS  		1E5
+	FREQ_RANGE 		logspace(3.0,15,100) um
+	THETA	   		0 deg
+	PHI	   			0 deg
+	EFIELD_DIST   	CENTER(0,0,0.5)
+ENDESOURCE
+
+// **************** Define ouputs and other variables *************************
+SETUP
+	FILE_SUFIX	VO2-composite_t73um
+ENDSETUP
+
+// Photons being lost on the edges of the slab
+MONITOR
+	FILENAME 	Edges
+	GEOMETRY 	BOX_ZOPEN( 50000.1, 50000.1, 73) CENTER(0,0, -36.50)
+	REGIONS 	EXTERIOR EXTERIOR
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Total transmittance
+MONITOR
+	FILENAME 	Tt
+	GEOMETRY 	FLATSURFACE_Z( 50E3, 50E3) CENTER(0,0, -200)
+	REGIONS 	EXTERIOR EXTERIOR
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Total Reflectance
+MONITOR
+	FILENAME 	Rt
+	GEOMETRY 	FLATSURFACE_Z( 50E3, 50E3) CENTER(0,0, +100)
+	REGIONS 	EXTERIOR EXTERIOR
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Specular transmittance
+MONITOR
+	FILENAME 	Ts
+	GEOMETRY 	FLATSURFACE_Z( 1E-3, 1E-3) CENTER(0,0, -1E3)
+	REGIONS 	EXTERIOR EXTERIOR
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Specular reflectance
+MONITOR
+	FILENAME 	Rs
+	GEOMETRY 	FLATSURFACE_Z( 1E-10, 1E-10) CENTER(0,0, +1E3)
+	REGIONS 	EXTERIOR EXTERIOR
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR

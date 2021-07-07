@@ -1,0 +1,218 @@
+Wed Jul  7 13:26:41 2021. Setup file found: PE+VO2_composite.setup
+Wed Jul  7 13:26:41 2021. Building MC-photon system...
+Wed Jul  7 13:26:41 2021. ... Getting instructions from *.setup file
+Wed Jul  7 13:26:41 2021. ... REGION: 2 objects found
+Wed Jul  7 13:26:41 2021. ... SURFACE: 1 objects found
+Wed Jul  7 13:26:41 2021. ... SOURCE: 100000 photons per frequency
+Wed Jul  7 13:26:41 2021. ... SOURCE: Frequency range, 'logspace(3.0,15,100) um'
+Wed Jul  7 13:26:41 2021. ... SOURCE: Theta angle range, '0 deg'
+Wed Jul  7 13:26:41 2021. ... SOURCE: Phi angle range, '0 deg'
+Wed Jul  7 13:26:41 2021. ... SOURCE: Field distribution, 'CENTER(0,0,0.5)'
+Wed Jul  7 13:26:41 2021. ... SOURCE: object successfully built
+Wed Jul  7 13:26:41 2021. ... STANDARD OUTPUT: 0 declarations found
+Wed Jul  7 13:26:41 2021. ... SETUP: object successfully built
+Wed Jul  7 13:26:41 2021. ... MONITOR: 5 objects found
+Wed Jul  7 13:26:41 2021. ... system successfully built!
+Wed Jul  7 13:26:41 2021. Setting angle of incidence (theta phi) = (  0.00,   0.00) deg
+Wed Jul  7 13:26:41 2021. ... Computing for lambda =   3.000 um
+Wed Jul  7 13:26:43 2021. mean of log(rand) 0.99624
+Wed Jul  7 13:26:43 2021. ... Computing for lambda =   3.049 um
+Wed Jul  7 13:26:45 2021. mean of log(rand) 1.00718
+Wed Jul  7 13:26:45 2021. ... Computing for lambda =   3.099 um
+Wed Jul  7 13:26:47 2021. mean of log(rand) 1.00195
+Wed Jul  7 13:26:47 2021. ... Computing for lambda =   3.150 um
+Wed Jul  7 13:26:49 2021. mean of log(rand) 1.00090
+Wed Jul  7 13:26:49 2021. ... Computing for lambda =   3.202 um
+Wed Jul  7 13:26:51 2021. mean of log(rand) 1.00129
+Wed Jul  7 13:26:51 2021. ... Computing for lambda =   3.254 um
+Wed Jul  7 13:26:53 2021. mean of log(rand) 0.99244
+Wed Jul  7 13:26:53 2021. ... Computing for lambda =   3.307 um
+Wed Jul  7 13:26:54 2021. mean of log(rand) 0.99767
+Wed Jul  7 13:26:54 2021. ... Computing for lambda =   3.362 um
+Wed Jul  7 13:26:56 2021. mean of log(rand) 1.00138
+Wed Jul  7 13:26:56 2021. ... Computing for lambda =   3.417 um
+Wed Jul  7 13:26:57 2021. mean of log(rand) 1.00101
+Wed Jul  7 13:26:57 2021. ... Computing for lambda =   3.473 um
+Wed Jul  7 13:26:58 2021. mean of log(rand) 1.00084
+Wed Jul  7 13:26:58 2021. ... Computing for lambda =   3.530 um
+Wed Jul  7 13:26:59 2021. mean of log(rand) 1.00739
+Wed Jul  7 13:26:59 2021. ... Computing for lambda =   3.587 um
+Wed Jul  7 13:27:00 2021. mean of log(rand) 0.99723
+Wed Jul  7 13:27:00 2021. ... Computing for lambda =   3.646 um
+Wed Jul  7 13:27:02 2021. mean of log(rand) 0.99717
+Wed Jul  7 13:27:02 2021. ... Computing for lambda =   3.706 um
+Wed Jul  7 13:27:04 2021. mean of log(rand) 1.00551
+Wed Jul  7 13:27:04 2021. ... Computing for lambda =   3.767 um
+Wed Jul  7 13:27:05 2021. mean of log(rand) 0.99668
+Wed Jul  7 13:27:05 2021. ... Computing for lambda =   3.828 um
+Wed Jul  7 13:27:07 2021. mean of log(rand) 0.99497
+Wed Jul  7 13:27:07 2021. ... Computing for lambda =   3.891 um
+Wed Jul  7 13:27:09 2021. mean of log(rand) 1.00364
+Wed Jul  7 13:27:09 2021. ... Computing for lambda =   3.955 um
+Wed Jul  7 13:27:10 2021. mean of log(rand) 1.00475
+Wed Jul  7 13:27:10 2021. ... Computing for lambda =   4.020 um
+Wed Jul  7 13:27:12 2021. mean of log(rand) 0.99537
+Wed Jul  7 13:27:12 2021. ... Computing for lambda =   4.086 um
+Wed Jul  7 13:27:14 2021. mean of log(rand) 0.99966
+Wed Jul  7 13:27:14 2021. ... Computing for lambda =   4.153 um
+Wed Jul  7 13:27:17 2021. mean of log(rand) 0.99189
+Wed Jul  7 13:27:17 2021. ... Computing for lambda =   4.221 um
+Wed Jul  7 13:27:19 2021. mean of log(rand) 1.00169
+Wed Jul  7 13:27:19 2021. ... Computing for lambda =   4.290 um
+Wed Jul  7 13:27:20 2021. mean of log(rand) 1.00574
+Wed Jul  7 13:27:20 2021. ... Computing for lambda =   4.360 um
+Wed Jul  7 13:27:22 2021. mean of log(rand) 0.99868
+Wed Jul  7 13:27:22 2021. ... Computing for lambda =   4.432 um
+Wed Jul  7 13:27:24 2021. mean of log(rand) 1.00396
+Wed Jul  7 13:27:24 2021. ... Computing for lambda =   4.504 um
+Wed Jul  7 13:27:26 2021. mean of log(rand) 0.99603
+Wed Jul  7 13:27:26 2021. ... Computing for lambda =   4.578 um
+Wed Jul  7 13:27:29 2021. mean of log(rand) 0.99830
+Wed Jul  7 13:27:29 2021. ... Computing for lambda =   4.653 um
+Wed Jul  7 13:27:31 2021. mean of log(rand) 0.99744
+Wed Jul  7 13:27:31 2021. ... Computing for lambda =   4.729 um
+Wed Jul  7 13:27:33 2021. mean of log(rand) 1.00006
+Wed Jul  7 13:27:33 2021. ... Computing for lambda =   4.807 um
+Wed Jul  7 13:27:35 2021. mean of log(rand) 1.00460
+Wed Jul  7 13:27:35 2021. ... Computing for lambda =   4.886 um
+Wed Jul  7 13:27:37 2021. mean of log(rand) 0.99992
+Wed Jul  7 13:27:37 2021. ... Computing for lambda =   4.966 um
+Wed Jul  7 13:27:39 2021. mean of log(rand) 0.99929
+Wed Jul  7 13:27:39 2021. ... Computing for lambda =   5.047 um
+Wed Jul  7 13:27:41 2021. mean of log(rand) 1.00280
+Wed Jul  7 13:27:41 2021. ... Computing for lambda =   5.130 um
+Wed Jul  7 13:27:43 2021. mean of log(rand) 0.99377
+Wed Jul  7 13:27:43 2021. ... Computing for lambda =   5.214 um
+Wed Jul  7 13:27:45 2021. mean of log(rand) 0.99909
+Wed Jul  7 13:27:45 2021. ... Computing for lambda =   5.299 um
+Wed Jul  7 13:27:48 2021. mean of log(rand) 0.99954
+Wed Jul  7 13:27:48 2021. ... Computing for lambda =   5.386 um
+Wed Jul  7 13:27:50 2021. mean of log(rand) 1.00332
+Wed Jul  7 13:27:50 2021. ... Computing for lambda =   5.475 um
+Wed Jul  7 13:27:53 2021. mean of log(rand) 0.99595
+Wed Jul  7 13:27:53 2021. ... Computing for lambda =   5.564 um
+Wed Jul  7 13:27:55 2021. mean of log(rand) 1.00101
+Wed Jul  7 13:27:55 2021. ... Computing for lambda =   5.656 um
+Wed Jul  7 13:27:58 2021. mean of log(rand) 0.99597
+Wed Jul  7 13:27:58 2021. ... Computing for lambda =   5.748 um
+Wed Jul  7 13:28:00 2021. mean of log(rand) 1.00121
+Wed Jul  7 13:28:00 2021. ... Computing for lambda =   5.842 um
+Wed Jul  7 13:28:02 2021. mean of log(rand) 0.99986
+Wed Jul  7 13:28:02 2021. ... Computing for lambda =   5.938 um
+Wed Jul  7 13:28:05 2021. mean of log(rand) 0.99919
+Wed Jul  7 13:28:05 2021. ... Computing for lambda =   6.036 um
+Wed Jul  7 13:28:07 2021. mean of log(rand) 0.99900
+Wed Jul  7 13:28:07 2021. ... Computing for lambda =   6.134 um
+Wed Jul  7 13:28:09 2021. mean of log(rand) 1.00792
+Wed Jul  7 13:28:09 2021. ... Computing for lambda =   6.235 um
+Wed Jul  7 13:28:11 2021. mean of log(rand) 1.00178
+Wed Jul  7 13:28:11 2021. ... Computing for lambda =   6.337 um
+Wed Jul  7 13:28:13 2021. mean of log(rand) 1.00097
+Wed Jul  7 13:28:13 2021. ... Computing for lambda =   6.441 um
+Wed Jul  7 13:28:16 2021. mean of log(rand) 1.00396
+Wed Jul  7 13:28:16 2021. ... Computing for lambda =   6.547 um
+Wed Jul  7 13:28:18 2021. mean of log(rand) 1.00342
+Wed Jul  7 13:28:18 2021. ... Computing for lambda =   6.654 um
+Wed Jul  7 13:28:20 2021. mean of log(rand) 0.99668
+Wed Jul  7 13:28:20 2021. ... Computing for lambda =   6.763 um
+Wed Jul  7 13:28:21 2021. mean of log(rand) 1.00065
+Wed Jul  7 13:28:21 2021. ... Computing for lambda =   6.874 um
+Wed Jul  7 13:28:22 2021. mean of log(rand) 1.00042
+Wed Jul  7 13:28:22 2021. ... Computing for lambda =   6.986 um
+Wed Jul  7 13:28:24 2021. mean of log(rand) 0.99676
+Wed Jul  7 13:28:24 2021. ... Computing for lambda =   7.101 um
+Wed Jul  7 13:28:26 2021. mean of log(rand) 0.99942
+Wed Jul  7 13:28:26 2021. ... Computing for lambda =   7.217 um
+Wed Jul  7 13:28:28 2021. mean of log(rand) 1.00903
+Wed Jul  7 13:28:28 2021. ... Computing for lambda =   7.336 um
+Wed Jul  7 13:28:29 2021. mean of log(rand) 0.99485
+Wed Jul  7 13:28:29 2021. ... Computing for lambda =   7.456 um
+Wed Jul  7 13:28:31 2021. mean of log(rand) 1.00007
+Wed Jul  7 13:28:31 2021. ... Computing for lambda =   7.578 um
+Wed Jul  7 13:28:33 2021. mean of log(rand) 1.00076
+Wed Jul  7 13:28:33 2021. ... Computing for lambda =   7.702 um
+Wed Jul  7 13:28:35 2021. mean of log(rand) 1.00167
+Wed Jul  7 13:28:35 2021. ... Computing for lambda =   7.829 um
+Wed Jul  7 13:28:37 2021. mean of log(rand) 1.00239
+Wed Jul  7 13:28:37 2021. ... Computing for lambda =   7.957 um
+Wed Jul  7 13:28:39 2021. mean of log(rand) 1.00168
+Wed Jul  7 13:28:39 2021. ... Computing for lambda =   8.087 um
+Wed Jul  7 13:28:41 2021. mean of log(rand) 0.99701
+Wed Jul  7 13:28:41 2021. ... Computing for lambda =   8.220 um
+Wed Jul  7 13:28:43 2021. mean of log(rand) 0.99967
+Wed Jul  7 13:28:43 2021. ... Computing for lambda =   8.354 um
+Wed Jul  7 13:28:45 2021. mean of log(rand) 1.00182
+Wed Jul  7 13:28:45 2021. ... Computing for lambda =   8.491 um
+Wed Jul  7 13:28:47 2021. mean of log(rand) 1.00448
+Wed Jul  7 13:28:47 2021. ... Computing for lambda =   8.631 um
+Wed Jul  7 13:28:49 2021. mean of log(rand) 1.00552
+Wed Jul  7 13:28:49 2021. ... Computing for lambda =   8.772 um
+Wed Jul  7 13:28:51 2021. mean of log(rand) 0.99822
+Wed Jul  7 13:28:51 2021. ... Computing for lambda =   8.916 um
+Wed Jul  7 13:28:53 2021. mean of log(rand) 0.99377
+Wed Jul  7 13:28:53 2021. ... Computing for lambda =   9.062 um
+Wed Jul  7 13:28:55 2021. mean of log(rand) 0.99483
+Wed Jul  7 13:28:55 2021. ... Computing for lambda =   9.210 um
+Wed Jul  7 13:28:57 2021. mean of log(rand) 1.00439
+Wed Jul  7 13:28:57 2021. ... Computing for lambda =   9.361 um
+Wed Jul  7 13:28:59 2021. mean of log(rand) 0.99909
+Wed Jul  7 13:28:59 2021. ... Computing for lambda =   9.515 um
+Wed Jul  7 13:29:01 2021. mean of log(rand) 0.99850
+Wed Jul  7 13:29:01 2021. ... Computing for lambda =   9.671 um
+Wed Jul  7 13:29:03 2021. mean of log(rand) 0.99727
+Wed Jul  7 13:29:03 2021. ... Computing for lambda =   9.829 um
+Wed Jul  7 13:29:05 2021. mean of log(rand) 0.99913
+Wed Jul  7 13:29:05 2021. ... Computing for lambda =   9.990 um
+Wed Jul  7 13:29:07 2021. mean of log(rand) 1.00295
+Wed Jul  7 13:29:07 2021. ... Computing for lambda =  10.154 um
+Wed Jul  7 13:29:08 2021. mean of log(rand) 1.00067
+Wed Jul  7 13:29:08 2021. ... Computing for lambda =  10.321 um
+Wed Jul  7 13:29:10 2021. mean of log(rand) 1.00147
+Wed Jul  7 13:29:10 2021. ... Computing for lambda =  10.490 um
+Wed Jul  7 13:29:12 2021. mean of log(rand) 0.99916
+Wed Jul  7 13:29:12 2021. ... Computing for lambda =  10.662 um
+Wed Jul  7 13:29:14 2021. mean of log(rand) 1.00132
+Wed Jul  7 13:29:14 2021. ... Computing for lambda =  10.836 um
+Wed Jul  7 13:29:16 2021. mean of log(rand) 0.99938
+Wed Jul  7 13:29:16 2021. ... Computing for lambda =  11.014 um
+Wed Jul  7 13:29:18 2021. mean of log(rand) 1.00020
+Wed Jul  7 13:29:18 2021. ... Computing for lambda =  11.195 um
+Wed Jul  7 13:29:20 2021. mean of log(rand) 0.99511
+Wed Jul  7 13:29:20 2021. ... Computing for lambda =  11.378 um
+Wed Jul  7 13:29:22 2021. mean of log(rand) 1.00184
+Wed Jul  7 13:29:22 2021. ... Computing for lambda =  11.564 um
+Wed Jul  7 13:29:24 2021. mean of log(rand) 0.99974
+Wed Jul  7 13:29:24 2021. ... Computing for lambda =  11.754 um
+Wed Jul  7 13:29:25 2021. mean of log(rand) 0.99834
+Wed Jul  7 13:29:25 2021. ... Computing for lambda =  11.947 um
+Wed Jul  7 13:29:27 2021. mean of log(rand) 0.99823
+Wed Jul  7 13:29:27 2021. ... Computing for lambda =  12.142 um
+Wed Jul  7 13:29:29 2021. mean of log(rand) 1.00008
+Wed Jul  7 13:29:29 2021. ... Computing for lambda =  12.341 um
+Wed Jul  7 13:29:31 2021. mean of log(rand) 0.99522
+Wed Jul  7 13:29:31 2021. ... Computing for lambda =  12.544 um
+Wed Jul  7 13:29:33 2021. mean of log(rand) 0.99697
+Wed Jul  7 13:29:33 2021. ... Computing for lambda =  12.749 um
+Wed Jul  7 13:29:35 2021. mean of log(rand) 1.00281
+Wed Jul  7 13:29:35 2021. ... Computing for lambda =  12.958 um
+Wed Jul  7 13:29:37 2021. mean of log(rand) 1.00314
+Wed Jul  7 13:29:37 2021. ... Computing for lambda =  13.171 um
+Wed Jul  7 13:29:38 2021. mean of log(rand) 1.00562
+Wed Jul  7 13:29:38 2021. ... Computing for lambda =  13.387 um
+Wed Jul  7 13:29:40 2021. mean of log(rand) 0.99743
+Wed Jul  7 13:29:40 2021. ... Computing for lambda =  13.606 um
+Wed Jul  7 13:29:42 2021. mean of log(rand) 1.00126
+Wed Jul  7 13:29:42 2021. ... Computing for lambda =  13.829 um
+Wed Jul  7 13:29:43 2021. mean of log(rand) 1.00014
+Wed Jul  7 13:29:43 2021. ... Computing for lambda =  14.056 um
+Wed Jul  7 13:29:44 2021. mean of log(rand) 0.99565
+Wed Jul  7 13:29:44 2021. ... Computing for lambda =  14.286 um
+Wed Jul  7 13:29:46 2021. mean of log(rand) 0.99642
+Wed Jul  7 13:29:46 2021. ... Computing for lambda =  14.520 um
+Wed Jul  7 13:29:47 2021. mean of log(rand) 0.99926
+Wed Jul  7 13:29:47 2021. ... Computing for lambda =  14.758 um
+Wed Jul  7 13:29:48 2021. mean of log(rand) 0.99890
+Wed Jul  7 13:29:48 2021. ... Computing for lambda =  15.000 um
+Wed Jul  7 13:29:50 2021. mean of log(rand) 0.99887
+Wed Jul  7 13:29:50 2021. ... Writting results to file ...
+Wed Jul  7 13:29:50 2021. done with calculations ...
