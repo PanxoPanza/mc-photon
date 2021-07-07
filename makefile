@@ -23,7 +23,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 # -----------------------------------------------------------------
 # main target
-mc_photon: $(OBJ) $(ODIR)/localmathlib.o $(ODIR)/uni_localmathlib.o $(ODIR)/materials.o
+mc-photon: $(OBJ) $(ODIR)/localmathlib.o $(ODIR)/uni_localmathlib.o $(ODIR)/materials.o
 	$(CC) -o $@ $^ $(CFLAGS)
 
 # object targets
