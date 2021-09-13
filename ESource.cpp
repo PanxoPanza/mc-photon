@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 #include "localmathlib.h"
 
 Esource::Esource(int Nhw, 

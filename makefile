@@ -5,7 +5,7 @@ mathlib_dep = $(patsubst %,$(mathlib_lib)/%,localmathlib.h) $(patsubst %,$(mathl
 optprop_lib = ./optical_properties
 optprop_dep = $(patsubst %,$(optprop_lib)/%,materials.h)
 
-DEPS = $(optprop_dep) $(mathlib_dep) MCRT_library.h
+DEPS = $(optprop_dep) $(mathlib_dep) mcphoton_lib.h
 
 # -----------------------------------------------------------------
 # objects directory
