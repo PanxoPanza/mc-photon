@@ -46,7 +46,7 @@ $(ODIR)/%.o: %.cpp $(DEPS)
 .PHONY: clean
 
 clean:
-	rm -rf $(ODIR) mc_photon
+	rm -rf $(ODIR) mc-photon
 
 all:
 	@echo $(DEPS)

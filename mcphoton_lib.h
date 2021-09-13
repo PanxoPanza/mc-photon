@@ -1,5 +1,5 @@
-#ifndef __MC_RayTracing__MCRT_Library__
-#define __MC_RayTracing__MCRT_Library__
+#ifndef __MC_RayTracing__mcphoton_lib__
+#define __MC_RayTracing__mcphoton_lib__
 
 #include<iostream>
 #include<string>
