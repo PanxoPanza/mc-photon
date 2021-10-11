@@ -1,12 +1,10 @@
 # TODO list
 - Eliminate REGION dependence in "Monitor" class
 - Kill photon after many scattering events in the same region
-- Fix code for correct parallel computing work
 - Change frequency units to microns
 - Change dimension units to mm
 - Warning msg for extrapolated values (Mie scattering and others).
     "Warning extrapolated values at SOMEWAVELEGNTH in thefile.mie"
-- Add a generic filename and add this name to each monitor
 - add a debug command to read from .setup file
 - take flags from command line
 - take refractive index from nk data (not from eps)

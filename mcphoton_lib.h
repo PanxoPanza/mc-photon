@@ -506,7 +506,8 @@ public:
 class RTMonitor : public Surface {
 private :
 	dvector *x_data; int x_size;
-	dvector *y_data; int y_size;
+	dvector *y_data; int y_size; int y_data_num;
+	int nThreads;
 	FILE *foutID; // , *fextra;
 	int TotalPhotons;
 	int out_type;
@@ -525,7 +526,7 @@ public:
 	bool PhotonHits(Photon &hw) const;
 	void PhotonDetected(const int &w_idx, Photon *hw);
 	void AddTotalPhoton(const int Nhw);
-	void SetOutput(double *w_freq = NULL, int w_size = 0, string msh_file_name = "");
+	void SetOutput(double *w_freq = NULL, int w_size = 0, string msh_file_name = "", int NT = 1);
 	void Close_oFiles(void);
 	void set_file_output_off(void);
 	bool Print_To_File(void) const;

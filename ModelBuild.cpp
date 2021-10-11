@@ -3,7 +3,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 //#include "localmathlib.h"
 
 #define UNIT_FORMAT 1
@@ -20,8 +20,6 @@ ModelBuild::ModelBuild(string setupfile) {
 	// check if file exist
 	Initiallize();
 	InputSetup(setupfile);
-	omp_set_num_threads(1); // Temporal (need to fix parallel computing)
-	//if (nThread != 0) omp_set_num_threads(nThread);
 }
 
 ModelBuild::~ModelBuild() {
@@ -552,9 +550,11 @@ void ModelBuild::BuildStdoutput(vector<InstrSet> &vMonitorSet, vector<InstrSet> 
 		NumStdOut++;;
 	}
 
-	if (!Value("THREADS", vOutputSet, 0, Ninst).empty())
+	if (!Value("THREADS", vOutputSet, 0, Ninst).empty()){
 		nThread = (int)stod(Value("THREADS", vOutputSet, 0, Ninst));
-
+		if (nThread != 0) omp_set_num_threads(nThread);
+	}
+	
 	file_sufix = Value("FILE_SUFIX", vOutputSet, 0, Ninst);
 
 	Log("... STANDARD OUTPUT: %i declarations found", NumStdOut);
@@ -636,7 +636,7 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 		for (int j = 0; j < NumStdOut; j++)
 			if (std_output[j]->link_monitor(Monitor[i])) break;
 
-		Monitor[i]->SetOutput(w_freq, w_size, xy_target_file);
+		Monitor[i]->SetOutput(w_freq, w_size, xy_target_file, nThread);
 	}
 
 	Log("... MONITOR: %i objects found", NumMonitors - 2 * NumStdOut);
@@ -714,7 +714,6 @@ string ModelBuild::NewPhotonState(Photon *hw) const {
 		Monitor[hw->GetMonitorID()]->PhotonDetected(iw, hw);
 		break;
 	}
-
 	delete[] Length;
 
 	// Kill photon if goes internal reflection
@@ -855,21 +854,21 @@ bool ModelBuild::Reset_wProperties(void) {
 
 bool ModelBuild::Save(void) {
 
-	if (xEsource->End_spectrum()) {
-		Log("... Writting results to file ...");
-		// write results to file
-		for (int i = 0; i < NumMonitors; i++)
-			if (Monitor[i]->Print_To_File())
-				Monitor[i]->save_to_file();
+	if (!xEsource->End_spectrum())
+		return false;
+	
+	Log("... Writting results to file ...");
+	// write results to file
+	for (int i = 0; i < NumMonitors; i++)
+		if (Monitor[i]->Print_To_File())
+			Monitor[i]->save_to_file();
 
-		for (int i = 0; i < NumStdOut; i++)
-			std_output[i]->save_to_file();
+	for (int i = 0; i < NumStdOut; i++)
+		std_output[i]->save_to_file();
 
-		// clean monitors
-		for (int i = 0; i < NumMonitors; i++)
-			Monitor[i]->clean_y_data();
+	// clean monitors
+	for (int i = 0; i < NumMonitors; i++)
+		Monitor[i]->clean_y_data();
 
-		return true;
-	}
-	return false;
+	return true;
 }

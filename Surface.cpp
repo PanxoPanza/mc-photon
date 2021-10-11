@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _USE_MATH_DEFINES
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 
 
 // plot types for monitor
@@ -65,6 +65,7 @@ bool RTSurface::PhotonHits(Photon &hw) const {
 	Point3D x0, x0_new;
 	double dz = DBL_MAX, dz_new;
 
+	// Check intersection between the photon with each panel
 	for (int i = 0; i < NumPanels; i++) {
 		if (Panels[i].PhotonHits(hw, dz_new, x0_new)){
 			if (dz_new < dz) {
@@ -98,16 +99,16 @@ int RTSurface::RefractPhoton(Photon &hw) const {
 
 	int FresnelEvent = FresnelRefraction(iFrom, iTo, kz_Dir, hw);
 
-	if (FresnelEvent == 1) { // Photon reflected. Returns to "From" region
-		hw.SetRegion(Regions[iFrom]);
-	}
-	else if (FresnelEvent == -1) { // Photon transmitted to a new region
-		hw.SetRegion(Regions[iTo]);
-	}
-	else if (FresnelEvent == 0) { // Photon absorbed at the interface - Kill
-		hw.PhotonKill();
-	}
-	//cout << hw.Print();
+	// Photon reflected. Returns to "From" region
+	if      (FresnelEvent == +1)	hw.SetRegion(Regions[iFrom]);
+
+	// Photon transmitted to a new region
+	else if (FresnelEvent == -1)	hw.SetRegion(Regions[iTo]);
+
+	// Photon absorbed at the interface - Kill
+	else if (FresnelEvent == 0) 	hw.PhotonKill();
+
+	// cout << hw.Print();
 	return FresnelEvent;
 }
 
@@ -170,12 +171,11 @@ void RTSurface::TransferMatrix(const cdouble &kx0, double w, int kz_Dir, string 
 		sinTi = sinTi != 0.0 ? sinTi : 1E-15; // make sinTi a small number if zero
 
 		kzd = ki * cosTi* d;
-		if (pol.compare("s") == 0) {
-			pf = - Z0*mu/(Ni*cosTi);// surface impedance
-		}
-		else if (pol.compare("p") == 0) {
-			pf =   Z0*mu*cosTi/Ni; // surface impedance
-		}
+		// surface impedance
+		if (pol.compare("s") == 0)	pf = - Z0*mu/(Ni*cosTi);
+
+		 // surface impedance
+		else if (pol.compare("p") == 0) pf =   Z0*mu*cosTi/Ni;
 
 		// Get transfer matrix coeffients
 		m11_new =        cos(kzd)*m11 - II/pf*sin(kzd)*m12;
@@ -264,7 +264,7 @@ int RTSurface::FresnelRefraction(const int &idx_from, const int &idx_to, const i
 	cosTt = cosTt != 0.0 ? cosTt : 1E-15; // make cosTt a small number if zero
 
 	/*****************************  Fresnel Coefficients (s-polarization)**********************************/
-	// get transfer matrix for multilayer film
+	// Get transfer matrix for multilayer film
 	m11 = 1.0; m12 = 0.0; m21 = 0.0; m22 = 1.0;
 	if (NumLayers > 0) TransferMatrix(kx1, w, kz_Dir, "s", m11, m12, m21, m22);
 
@@ -278,7 +278,7 @@ int RTSurface::FresnelRefraction(const int &idx_from, const int &idx_to, const i
 		         ((m11*p2 + m12) + (m21*p2 + m22)*p1);
 
 	/*****************************  Fresnel Coefficients (p-polarization)**********************************/
-	// get transfer matrix for multilayer film
+	// Get transfer matrix for multilayer film
 	m11 = 1.0; m12 = 0.0; m21 = 0.0; m22 = 1.0;
 	if (NumLayers > 0) TransferMatrix(kx1, w, kz_Dir, "p", m11, m12, m21, m22);
 	
@@ -292,10 +292,11 @@ int RTSurface::FresnelRefraction(const int &idx_from, const int &idx_to, const i
 		         ((m11*p2 + m12) + (m21*p2 + m22)*p1);
 
 	//**************************** Effective reflectivity and transmissivity
-	// reflected and transmitted power s-polarization
+	// Reflected and transmitted power s-polarization
 	double Rs = abs(rs*conj(rs));
 	double Ts = real(n2*cosTt) / real(n1*cosTi)*abs(ts*conj(ts));
-	// reflected and transmitted power p-polarization
+
+	// Reflected and transmitted power p-polarization
 	double Rp = abs(rp*conj(rp));
 	double Tp = real(conj(n2)*cosTt) / real(conj(n1)*cosTi)*abs(tp*conj(tp));
 
@@ -379,7 +380,7 @@ RTMonitor::~RTMonitor() {
 void RTMonitor::mon_initialize(void) {
 	foutID = NULL;
 	x_data = NULL; x_size = 0;
-	y_data = NULL; y_size = 0;
+	y_data = NULL; y_size = 0; y_data_num = 0;
 	print_to_file = true;
 
 	//fextra = NULL;
@@ -430,7 +431,7 @@ int RTMonitor::GetPhotonCount(void) const {
 	return TotalPhotons;
 }
 
-void RTMonitor::SetOutput(double *w_freq, int w_size,  string msh_file_name) {
+void RTMonitor::SetOutput(double *w_freq, int w_size,  string msh_file_name,int NT) {
 /* Function set number of output results
 	Definition:
 		output 0: Radiation properties
@@ -439,11 +440,14 @@ void RTMonitor::SetOutput(double *w_freq, int w_size,  string msh_file_name) {
 *note: rest of output file will be defined in the future
 */
 	string oFile;
+	nThreads = NT;
 
 	switch (out_type) {
 	case RAD_PROP: // just radiation properties for now
+		
 		// create output data arrays
-		y_size = 3;
+		y_data_num = 3;
+
 		// if print to file is true, create file
 		if (print_to_file) {
 			oFile = Label + ".pow";
@@ -467,6 +471,9 @@ void RTMonitor::SetOutput(double *w_freq, int w_size,  string msh_file_name) {
 		ErrorMsg("Monitor: Unrecognized output");
 		break;
 	}
+
+	y_size = y_data_num*nThreads;
+
 	set_x_data(w_freq, w_size, msh_file_name);
 	set_y_data();
 }
@@ -509,6 +516,7 @@ void RTMonitor::clean_y_data(void) {
 void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 	int iw;
 	double Tol = 1E-4;
+	int nt;
 	int PanelID = hw->GetMonitorPanelID();
 	Vector3D k_hat = Panels[PanelID].GlobaltoLocal(hw->k_hat()); // photon momentum in local
 	Vector3D n_hat = Panels[PanelID].Normal(); // normal to monitor panel
@@ -529,7 +537,7 @@ void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 	if (!hw->PhotonIs(Regions[0])) return; // Photon from Region[1] to Region[0] >> not detected!
 
 	// Photon crosses from Region[0] to Region[1] >>> detected!!
-
+	nt = omp_get_thread_num();
 	switch (out_type) {
 	case RAD_PROP:
 		/* If photon is emited from the source (not from a QD) the frequency index matches
@@ -539,9 +547,9 @@ void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 		if (!hw->is_QDemitted()) iw = w_idx; // get freq index form the source
 		// else // "iw" from search in the w_array
 
-		y_data[0].at(iw) += 1.0 / (double)TotalPhotons;
-		y_data[1].at(iw) += cosTheta / (double)TotalPhotons;
-		y_data[2].at(iw) += hw->get_traveled_path()/ (double)TotalPhotons;
+		y_data[0 + y_data_num*nt].at(iw) += 1.0 / (double)TotalPhotons;
+		y_data[1 + y_data_num*nt].at(iw) += cosTheta / (double)TotalPhotons;
+		y_data[2 + y_data_num*nt].at(iw) += hw->get_traveled_path()/ (double)TotalPhotons;
 
 		//fprintf(fextra, "%7.3e ", hw->get_traveled_path());
 		break;
@@ -550,11 +558,11 @@ void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 	}
 }
 
-
 void RTMonitor::set_monitor(const double &xtheta, const double &xphi) {
 	theta = xtheta;
 	phi = xphi;
 }
+
 void RTMonitor::set_file_output_off(void) {
 	print_to_file = false;
 }
@@ -568,13 +576,20 @@ void RTMonitor::save_to_file(void) {
 	if (foutID == NULL || !print_to_file) 
 		ErrorMsg("Error Monitor " + Label + ": file not set");
 
+	// extract data per thread and save in the first y_data_num columns
+	for (int iy = 0; iy < y_data_num; iy++)
+		for (int iw = 0; iw < x_data[0].size(); iw++)
+			for (int nt = 1; nt < nThreads; nt++) {
+			y_data[iy].at(iw) += y_data[iy + y_data_num*nt].at(iw);
+	}
+
 	switch (out_type) {
 	case RAD_PROP:
 		for (int iw = 0; iw < x_data[0].size(); iw++) {
 			double Detect = y_data[0].at(iw) == 0 ? 1E-5 : y_data[0].at(iw);
 			fprintf(foutID, "%-6.2f\t", theta); // Zenith
 			fprintf(foutID, "%-6.2f\t", phi); // Azimuth
-			fprintf(foutID, "%-7.4e\t", x_data[0].at(iw)); // frequency
+			fprintf(foutID, "%-7.4e\t", x_data[0].at(iw)); // Frequency
 			fprintf(foutID, "%-9.6e\t", y_data[0].at(iw)); // Net power out
 			fprintf(foutID, "%-9.6e\t", y_data[1].at(iw)/ Detect); // Energy flux out
 			fprintf(foutID, "%10.6e\n",  y_data[2].at(iw)/ Detect); // Av. distance traveled
@@ -661,27 +676,16 @@ void Surface::SetGeometry(string &GeometryArg, const int &idx) {
 		FILE *MeshFileID = fopen(MeshFile.c_str(), "r");
 		ReadGMSHFile(MeshFileID, MeshFile);
 	}
-	else if (GeometryInst[1].IsFound) {
-		MakeBox(Lbox[0], Lbox[1], Lbox[2]);
-	}
-	else if (GeometryInst[2].IsFound) {
-		MakeBox(Lbox[0], Lbox[1], Lbox[2], "Z(+)_open");
-	}
-	else if (GeometryInst[3].IsFound) {
-		MakeBox(Lbox[0], Lbox[1], Lbox[2], "Z(-)_open");
-	}
-	else if (GeometryInst[4].IsFound) {
-		MakeBox(Lbox[0], Lbox[1], Lbox[2], "Z_open");
-	}
-	else if (GeometryInst[5].IsFound) {
-		MakeFlatSurface(Lbox[0], Lbox[1]);
-	}
+	else if (GeometryInst[1].IsFound) MakeBox(Lbox[0], Lbox[1], Lbox[2]);
+	else if (GeometryInst[2].IsFound) MakeBox(Lbox[0], Lbox[1], Lbox[2], "Z(+)_open");
+	else if (GeometryInst[3].IsFound) MakeBox(Lbox[0], Lbox[1], Lbox[2], "Z(-)_open");
+	else if (GeometryInst[4].IsFound) MakeBox(Lbox[0], Lbox[1], Lbox[2], "Z_open");
+	else if (GeometryInst[5].IsFound) MakeFlatSurface(Lbox[0], Lbox[1]);
 	SetCenter(); // get center of surface
 
 	// Check if CENTER statement has been declared and move surface accordingly
 	int i_end = sizeof(GeometryInst) / sizeof(GeometryInst[0]) - 2;
-	if (GeometryInst[i_end].IsFound)
-		MoveSurface(cdisplace);
+	if (GeometryInst[i_end].IsFound) MoveSurface(cdisplace);
 
 	//cout << Print();
 	//cout << "end Surface" << endl;
@@ -803,9 +807,8 @@ void Surface::MakeFlatSurface(double Lx, double Ly, string n_hat) {
 void Surface::SetCenter(void) {
 	if (vtx != NULL){
 		Point3D newcenter(0, 0, 0);
-		for (int i = 0; i < nVertex; i++) {
-			newcenter += vtx[i];
-		}
+		for (int i = 0; i < nVertex; i++) 
+		newcenter += vtx[i];
 		center = newcenter / nVertex;
 	}
 	else {
