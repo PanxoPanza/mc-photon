@@ -584,7 +584,7 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 	InstrSet InstMin[] = {
 		{"GEOMETRY", 0, 1, "" },
 		{"FILENAME", 0, 1, "" },
-		{"REGIONS" , 0, 1, "" },
+		//{"REGIONS" , 0, 1, "" },
 		{"PLOT_TYPE", 0, 1, ""},
 		{"", 0, 0, ""}
 	};
@@ -597,7 +597,7 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 	Monitor = new RTMonitor*[NumMonitors];
 
 	for (int i = 0; i < NumMonitors; i++) {
-		FoundRegUp = false; FoundRegLo = false;
+		//FoundRegUp = false; FoundRegLo = false;
 
 		// Set geometry
 		MonGeo = Value("GEOMETRY", vMonitorSet, i, Ninst);
@@ -608,8 +608,9 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 
 		// Get upper and lower regions
 		token = Tokenize(Value("REGIONS", vMonitorSet, i, Ninst));
-		MonRegUp = token.at(0);
-		MonRegLo = token.at(1);
+		//MonRegUp = token.at(0);
+		//MonRegLo = token.at(1);
+		/*
 		for (int j = 0; j < NumRegions; j++) {
 			if (!Region[j]->Label.compare(MonRegUp)) {
 				RegionUp = Region[j];
@@ -619,9 +620,9 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 				RegionLo = Region[j];
 				FoundRegLo = true;
 			}
-		}
+		}*/
 		// check that both regions have been defined
-		if (!(FoundRegUp && FoundRegLo)) ErrorMsg("Undefined regions for Monitor " + oFile);
+		//if (!(FoundRegUp && FoundRegLo)) ErrorMsg("Undefined regions for Monitor " + oFile);
 
 		// get plot type
 		plot_type = Value("PLOT_TYPE", vMonitorSet, i, Ninst);
@@ -630,7 +631,7 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 		xy_target_file = Value("TARGET_POINTS", vMonitorSet, i, Ninst);
 
 		// construct monitor
-		Monitor[i] = new RTMonitor(RegionUp, RegionLo, MonGeo, oFile, TotalPhotons, plot_type, i);
+		Monitor[i] = new RTMonitor(MonGeo, oFile, TotalPhotons, plot_type, i);
 
 		// check if monitor is linked to a standard output object
 		for (int j = 0; j < NumStdOut; j++)

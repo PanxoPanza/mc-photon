@@ -452,8 +452,6 @@ protected:
 	Panel *Panels;
 	int MeshTag;
 	Point3D center;
-	int NumRegions;
-	RTRegion *Regions[2];
 	// add vertex of the polygon;
 
 	void Initialize();
@@ -467,8 +465,7 @@ public:
 	string Label;
 	int Index;
 	Surface();
-	Surface(RTRegion *External, RTRegion *Internal, string &GeometryArg,
-		const string &xLabel="", const int &idx = 0);
+	Surface(string &GeometryArg, const string &xLabel="", const int &idx = 0);
 	~Surface();
 	void SetGeometry(string &GeometryType, const int &idx);
 	void ReadGMSHFile(FILE *MeshFile, const string &FileName);
@@ -486,6 +483,8 @@ private :
 	cdouble *epsFilm;
 	cdouble *muFilm;
 	bool frequency_set;
+	int NumRegions;
+	RTRegion *Regions[2];
 
 public:
 
@@ -520,8 +519,7 @@ private :
 public:
 	double theta, phi;
 	RTMonitor();
-	RTMonitor(RTRegion *External, RTRegion *Internal, string &GeometryType,
-		const string &monLabel ,const int Nhw, string plot_type, const int &idx = 0);
+	RTMonitor(string &GeometryType, const string &monLabel ,const int Nhw, string plot_type, const int &idx = 0);
 	~RTMonitor();
 	bool PhotonHits(Photon &hw) const;
 	void PhotonDetected(const int &w_idx, Photon *hw);

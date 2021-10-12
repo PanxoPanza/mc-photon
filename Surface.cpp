@@ -11,7 +11,7 @@
 RTSurface::RTSurface() : Surface() {}
 
 RTSurface::RTSurface(RTRegion *External, RTRegion *Internal, string &GeometryArg, const string &xLabel, const int &idx) :
-	Surface(External, Internal, GeometryArg, xLabel, idx) {
+	Surface(GeometryArg, xLabel, idx) {
 	NumLayers = 0;
 	NumRegions = 2;
 	matFilm = NULL;
@@ -19,6 +19,8 @@ RTSurface::RTSurface(RTRegion *External, RTRegion *Internal, string &GeometryArg
 	epsFilm = NULL;
 	muFilm = NULL;
 	frequency_set = false;
+	Regions[0] = External;
+	Regions[1] = Internal;
 }
 
 RTSurface::~RTSurface(){ 
@@ -362,9 +364,9 @@ RTMonitor::RTMonitor() : Surface() {
 	mon_initialize();
 }
 
-RTMonitor::RTMonitor(RTRegion *External, RTRegion *Internal, string &GeometryType, 
+RTMonitor::RTMonitor(string &GeometryType, 
 	const string &monLabel, const int Nhw, string plot_type, const int &idx) :
-	Surface(External, Internal, GeometryType, monLabel, idx) {
+	Surface(GeometryType, monLabel, idx) {
 	
 	check_plot_type(plot_type);
 	mon_initialize();
@@ -533,9 +535,6 @@ void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 	// Store photon's new possition (pass to global coordinates) 
 	hw->SetPosition(Panels[PanelID].LocaltoGlobal(x0_loc));
 
-	// Photon is not counted if comes oposite to monitor's direction
-	if (!hw->PhotonIs(Regions[0])) return; // Photon from Region[1] to Region[0] >> not detected!
-
 	// Photon crosses from Region[0] to Region[1] >>> detected!!
 	nt = omp_get_thread_num();
 	switch (out_type) {
@@ -621,14 +620,13 @@ Surface::Surface()
 	Initialize();
 }
 
-Surface::Surface(RTRegion *External, RTRegion *Internal, string &GeometryArg, 
-	const string &xLabel, const int &idx)
+Surface::Surface(string &GeometryArg, const string &xLabel, const int &idx)
 {
 	Initialize();
 	SetGeometry(GeometryArg, idx);
 	Label = xLabel;
-	Regions[0] = External;
-	Regions[1] = Internal;
+	//Regions[0] = External;
+	//Regions[1] = Internal;
 }
 
 Surface::~Surface()
