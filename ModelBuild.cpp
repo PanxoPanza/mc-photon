@@ -174,7 +174,6 @@ void ModelBuild::InputSetup(string setupfile) {
 	InstrSet MonitorSet[] = {
 		{"GEOMETRY"		, 0, 1, "" },
 		{"FILENAME"		, 0, 1, "" },
-		{"REGIONS"		, 0, 1, "" },
 		{"PLOT_TYPE"	, 0, 1, ""},
 		{"TARGET_POINTS", 0, 1, ""},
 		{"", 0, 0, ""}
@@ -251,17 +250,10 @@ vector<InstrSet> ModelBuild::ExtractData(ifstream &File,
 
 	InstrSet *objlocal;
 	while (getline(File, line)) {
-		//cout << "Print lines" << endl;
-		//cout << line << endl; // promt line
 
 		CommentOut(line); // remove comments
-		//cout << "Remove comments" << endl;
-		//cout << line << endl; // promt line
 
 		token = Tokenize(line); // tokenize considering " " - "\t" - "," characters
-		//cout << "Print tokens" << endl;
-		//for (int i = 0; i < token.size(); i++) cout << token.at(i) << " ";
-		//cout << endl << endl;
 
 
 		// End of object declaration
@@ -395,11 +387,6 @@ void ModelBuild::BuildSurfaces(vector<InstrSet> vSurfaceSet, int Ninst) {
 	{ "GEOMETRY", 0, 1, "" },
 	{ "", 0, 0, "" }
 	};
-
-	/*
-	for (int i = 0; i < Ninst; i++) {
-		cout << vSurfaceSet.at(i).Name << "\t "<< vSurfaceSet.at(i).Value << endl;
-	}*/
 
 	if (!BuildObjects("SURFACE", vSurfaceSet, InstMin, Ninst)) // If false gives error
 		ErrorMsg("Undefined SURFACE declarations");
@@ -584,7 +571,6 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 	InstrSet InstMin[] = {
 		{"GEOMETRY", 0, 1, "" },
 		{"FILENAME", 0, 1, "" },
-		//{"REGIONS" , 0, 1, "" },
 		{"PLOT_TYPE", 0, 1, ""},
 		{"", 0, 0, ""}
 	};
@@ -597,7 +583,6 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 	Monitor = new RTMonitor*[NumMonitors];
 
 	for (int i = 0; i < NumMonitors; i++) {
-		//FoundRegUp = false; FoundRegLo = false;
 
 		// Set geometry
 		MonGeo = Value("GEOMETRY", vMonitorSet, i, Ninst);
@@ -608,22 +593,7 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 
 		// Get upper and lower regions
 		token = Tokenize(Value("REGIONS", vMonitorSet, i, Ninst));
-		//MonRegUp = token.at(0);
-		//MonRegLo = token.at(1);
-		/*
-		for (int j = 0; j < NumRegions; j++) {
-			if (!Region[j]->Label.compare(MonRegUp)) {
-				RegionUp = Region[j];
-				FoundRegUp = true;
-			}
-			if (!Region[j]->Label.compare(MonRegLo)) {
-				RegionLo = Region[j];
-				FoundRegLo = true;
-			}
-		}*/
-		// check that both regions have been defined
-		//if (!(FoundRegUp && FoundRegLo)) ErrorMsg("Undefined regions for Monitor " + oFile);
-
+		
 		// get plot type
 		plot_type = Value("PLOT_TYPE", vMonitorSet, i, Ninst);
 

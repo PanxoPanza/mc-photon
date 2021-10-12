@@ -535,7 +535,7 @@ void RTMonitor::PhotonDetected(const int &w_idx,Photon *hw) {
 	// Store photon's new possition (pass to global coordinates) 
 	hw->SetPosition(Panels[PanelID].LocaltoGlobal(x0_loc));
 
-	// Photon crosses from Region[0] to Region[1] >>> detected!!
+	// Photon detected!!
 	nt = omp_get_thread_num();
 	switch (out_type) {
 	case RAD_PROP:
@@ -625,8 +625,6 @@ Surface::Surface(string &GeometryArg, const string &xLabel, const int &idx)
 	Initialize();
 	SetGeometry(GeometryArg, idx);
 	Label = xLabel;
-	//Regions[0] = External;
-	//Regions[1] = Internal;
 }
 
 Surface::~Surface()
@@ -684,9 +682,6 @@ void Surface::SetGeometry(string &GeometryArg, const int &idx) {
 	// Check if CENTER statement has been declared and move surface accordingly
 	int i_end = sizeof(GeometryInst) / sizeof(GeometryInst[0]) - 2;
 	if (GeometryInst[i_end].IsFound) MoveSurface(cdisplace);
-
-	//cout << Print();
-	//cout << "end Surface" << endl;
 
 }
 
