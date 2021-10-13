@@ -459,7 +459,7 @@ void RTMonitor::SetOutput(double *w_freq, int w_size,  string msh_file_name,int 
 			fprintf(foutID, "# File columns: \n");
 			fprintf(foutID, "# \t 1 Incidence zenith angle (deg) \n");
 			fprintf(foutID, "# \t 2 Incidence azimuth angle (deg) \n");
-			fprintf(foutID, "# \t 3 Frequency (rad/s)\n");
+			fprintf(foutID, "# \t 3 Wavelength (um)\n");
 			fprintf(foutID, "# \t 4 Photon's relative power intensity \n");
 			fprintf(foutID, "# \t 5 Photon's relative energy flux \n");
 			fprintf(foutID, "# \t 6 Mean distance (um) traveled by photon \n");
@@ -586,11 +586,11 @@ void RTMonitor::save_to_file(void) {
 	case RAD_PROP:
 		for (int iw = 0; iw < x_data[0].size(); iw++) {
 			double Detect = y_data[0].at(iw) == 0 ? 1E-5 : y_data[0].at(iw);
-			fprintf(foutID, "%-6.2f\t", theta); // Zenith
-			fprintf(foutID, "%-6.2f\t", phi); // Azimuth
-			fprintf(foutID, "%-7.4e\t", x_data[0].at(iw)); // Frequency
-			fprintf(foutID, "%-9.6e\t", y_data[0].at(iw)); // Net power out
-			fprintf(foutID, "%-9.6e\t", y_data[1].at(iw)/ Detect); // Energy flux out
+			fprintf(foutID, "%-6.2f\t", theta); 					// Zenith
+			fprintf(foutID, "%-6.2f\t", phi); 						// Azimuth
+			fprintf(foutID, "%-7.4e\t", x_data[0].at(iw)); 			// Frequency
+			fprintf(foutID, "%-9.6e\t", y_data[0].at(iw)); 			// Net power out
+			fprintf(foutID, "%-9.6e\t", y_data[1].at(iw)/ Detect); 	// Energy flux out
 			fprintf(foutID, "%10.6e\n",  y_data[2].at(iw)/ Detect); // Av. distance traveled
 		}
 	}

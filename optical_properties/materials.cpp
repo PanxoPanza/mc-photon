@@ -209,6 +209,9 @@ int Material::SetMaterial(const string &MaterialSet)
 string Material::MaterialType(void) const { return MatType; }
 
 cdouble Material::Eps(double w) {
+	// Change units from microns to rad/s (Temporary!!)
+	w = 2 * M_PI * SPEEDOFLIGHT / w * 1E6;
+
 	if (!MatType.compare("CONST_EPS")) return eps0;
 	if (!MatType.compare("PERFECT_CONDUCTOR")) return eps0;
 	if (!MatType.compare("EPS_FILE")) return eps_interp(w);

@@ -580,24 +580,24 @@ private:
 	Vector3D GenerateMomentum(double xtheta, double xphi) const;
 	double *SetRange(string func, int &Nx, double C = 1);
 	double *SetAngle(string str, int &Nx, string &Unit);
-	void ConvertFrequency();
+	void Convert_wUnits();
 
 public:
 	string wUnit, thetaUnit, phiUnit;
 	Esource(int Nhw,
 		string wfunc, string phifun, string thetafun, string Edistfun);
 	~Esource();
-	void setFrequency(string func);
+	void setWavelength(string func);
 	void setOrientation(string strPhi, string strTheta);
 	void setEfield(string strfunc);
 
 	int GetTotalPhotons() const;
 
-	// Frequency data out
-	double GetFrequency_val(bool printout = false) const;
-	double* GetFrequency_array(bool printout = false) const;
-	int GetFrequency_N(void) const;
-	int GetFrequency_idx(void) const;
+	// Wavelength data out
+	double GetWavelength_val(bool printout = false) const;
+	double* GetWavelength_array(bool printout = false) const;
+	int GetWavelength_N(void) const;
+	int GetWavelength_idx(void) const;
 
 	// Zenith (theta) incidence angle data out
 	double GetZenith_val(bool printout = false) const;

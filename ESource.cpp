@@ -9,7 +9,7 @@ Esource::Esource(int Nhw,
 	string wfunc, string phifun, string thetafun, string Edistfun) {
 	Initiallize();
 	Nphotons = Nhw;
-	setFrequency(wfunc);
+	setWavelength(wfunc);
 	setOrientation(phifun, thetafun);
 	setEfield(Edistfun);
 }
@@ -37,7 +37,7 @@ void Esource::CleanUp(void) {
 	Initiallize();
 }
 
-void Esource::setFrequency(string func) {
+void Esource::setWavelength(string func) {
 	vstring token;
 	vstring arg;
 
@@ -46,7 +46,7 @@ void Esource::setFrequency(string func) {
 
 	func = token.at(0);
 	w = SetRange(func,Nw);
-	ConvertFrequency();
+	Convert_wUnits();
 }
 
 void Esource::setOrientation(string strPhi, string strTheta) {
@@ -224,42 +224,39 @@ double *Esource::SetRange(string func, int &Nx, double C) {
 
 /*****************************************************************************************/
 // Frequency data out
-int Esource::GetFrequency_idx(void) const { return iw; }
-int Esource::GetFrequency_N(void) const { return Nw; }
+int Esource::GetWavelength_idx(void) const { return iw; }
+int Esource::GetWavelength_N(void) const { return Nw; }
 
-double Esource::GetFrequency_val(bool printout) const {
-	if (!printout) { // if printout false retrieve frequency in rad/s
-		return w[iw];
-	}
-	else{
-		double w_out;
-		if (!wUnit.compare("rad/s")) { w_out = w[iw]; }
-		else if (!wUnit.compare("Hz")) { w_out = w[iw] / (2 * M_PI); }
-		else if (!wUnit.compare("eV")) { w_out = HBAR * w[iw] / EV; }
-		else if (!wUnit.compare("nm")) { w_out = 2 * M_PI*SPEEDOFLIGHT / (w[iw] * 1E-9); }
-		else if (!wUnit.compare("um")) { w_out = 2 * M_PI*SPEEDOFLIGHT / (w[iw] * 1E-6); }
-		else if (!wUnit.compare("mm")) { w_out = 2 * M_PI*SPEEDOFLIGHT / (w[iw] * 1E-3); }
-		else { ErrorMsg("Esource: Frequency unit not recognized"); }
+double Esource::GetWavelength_val(bool printout) const {
+	 // if printout false retrieve frequency in microns
+	if (!printout) return w[iw];
+
+	double w_out;
+	if      (!wUnit.compare("rad/s")) w_out = 2 * M_PI*SPEEDOFLIGHT / w[iw] * 1E6;
+	else if (!wUnit.compare("Hz")) w_out = SPEEDOFLIGHT / w[iw] * 1E6;
+	else if (!wUnit.compare("eV")) w_out = 2 * M_PI*SPEEDOFLIGHT / (EV*w[iw]/HBAR) * 1E6;
+	else if (!wUnit.compare("nm")) w_out = w[iw] * 1E-3;
+	else if (!wUnit.compare("um")) w_out = w[iw];
+	else if (!wUnit.compare("mm")) w_out = w[iw] * 1E3;
+	else ErrorMsg("Esource: Frequency unit not recognized");
 
 		return w_out;
-	}
 }
 
-double* Esource::GetFrequency_array(bool printout) const {
-	double *w_out = new double[Nw];
+double* Esource::GetWavelength_array(bool printout) const {
 	if (!printout) return w;
-	else{
-		for (int iiw = 0; iiw < Nw; iiw++) {
-			if (!wUnit.compare("rad/s")) {}
-			else if (!wUnit.compare("Hz")) { w_out[iiw] = w[iiw] / (2 * M_PI); }
-			else if (!wUnit.compare("eV")) { w_out[iiw] = HBAR * w[iiw] / EV; }
-			else if (!wUnit.compare("nm")) { w_out[iiw] = 2 * M_PI*SPEEDOFLIGHT / (w[iiw] * 1E-9); }
-			else if (!wUnit.compare("um")) { w_out[iiw] = 2 * M_PI*SPEEDOFLIGHT / (w[iiw] * 1E-6); }
-			else if (!wUnit.compare("mm")) { w_out[iiw] = 2 * M_PI*SPEEDOFLIGHT / (w[iiw] * 1E-3); }
-			else { ErrorMsg("Esource: Frequency unit not recognized"); }
-		}
-		return w_out;
+	
+	double *w_out = new double[Nw];
+	for (int iiw = 0; iiw < Nw; iiw++) {
+		if      (!wUnit.compare("rad/s")) w[iiw] = 2 * M_PI*SPEEDOFLIGHT / w[iiw] * 1E6;
+		else if (!wUnit.compare("Hz"))  w[iiw] = SPEEDOFLIGHT / w[iiw] * 1E6;
+		else if (!wUnit.compare("eV")) w[iiw] = 2 * M_PI*SPEEDOFLIGHT / (EV*w[iiw]/HBAR)*1E6;
+		else if (!wUnit.compare("nm")) w[iiw] = w[iiw] * 1E-3;
+		else if (!wUnit.compare("um")) {}
+		else if (!wUnit.compare("mm")) w[iiw] = w[iiw] * 1E+3;
+		else  ErrorMsg("Esource: Frequency unit not recognized");
 	}
+	return w_out;
 }
 /*****************************************************************************************/
 
@@ -277,7 +274,7 @@ double Esource::GetZenith_val(bool printout) const {
 		double theta_out;
 		if (!thetaUnit.compare("rad")) { theta_out = theta[iThe]; }
 		else if (!thetaUnit.compare("deg")) { theta_out = theta[iThe] * 180.0/ M_PI; }
-		else { ErrorMsg("Esource: Frequency unit not recognized"); }
+		else { ErrorMsg("Esource:theta unit not recognized"); }
 
 		return theta_out;
 	}
@@ -297,7 +294,7 @@ double Esource::GetAzimuth_val(bool printout) const {
 		double phi_out;
 		if (!phiUnit.compare("rad")) { phi_out = phi[iPhi]; }
 		else if (!phiUnit.compare("deg")) { phi_out = phi[iPhi] * 180.0 / M_PI; }
-		else { ErrorMsg("Esource: Frequency unit not recognized"); }
+		else { ErrorMsg("Esource: phi unit not recognized"); }
 
 		return phi_out;
 	}
@@ -313,16 +310,16 @@ bool Esource::FirstRun() const {
 	else return false;
 }
 
-// convert the input frequency into rad/s
-void Esource::ConvertFrequency() {
+// convert the input frequency into microns
+void Esource::Convert_wUnits() {
 	for (int iiw = 0; iiw < Nw; iiw++){
-		if (!wUnit.compare("rad/s")) {}
-		else if (!wUnit.compare("Hz")) { w[iiw] = 2 * M_PI*w[iiw]; }
-		else if (!wUnit.compare("eV")) { w[iiw] = EV * w[iiw] / HBAR; }
-		else if (!wUnit.compare("nm")) { w[iiw] = 2 * M_PI*SPEEDOFLIGHT / (w[iiw] * 1E-9); }
-		else if (!wUnit.compare("um")) { w[iiw] = 2 * M_PI*SPEEDOFLIGHT / (w[iiw] * 1E-6); }
-		else if (!wUnit.compare("mm")) { w[iiw] = 2 * M_PI*SPEEDOFLIGHT / (w[iiw] * 1E-3); }
-		else { ErrorMsg("Esource: Frequency unit not recognized"); }
+		if      (!wUnit.compare("rad/s")) w[iiw] = 2 * M_PI*SPEEDOFLIGHT / w[iiw] * 1E6;
+		else if (!wUnit.compare("Hz")) w[iiw] = SPEEDOFLIGHT / w[iiw] * 1E6;
+		else if (!wUnit.compare("eV")) w[iiw] = SPEEDOFLIGHT / (EV * w[iiw] / HBAR) * 1E6;
+		else if (!wUnit.compare("nm")) w[iiw] = w[iiw] * 1E-3;
+		else if (!wUnit.compare("um")) {}
+		else if (!wUnit.compare("mm")) w[iiw] = w[iiw] * 1E+3;
+		else  ErrorMsg("Esource: Frequency unit not recognized");
 	}
 
 }

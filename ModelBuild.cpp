@@ -255,7 +255,6 @@ vector<InstrSet> ModelBuild::ExtractData(ifstream &File,
 
 		token = Tokenize(line); // tokenize considering " " - "\t" - "," characters
 
-
 		// End of object declaration
 		if (!token.empty()){ // if line is not empty
 			if (objstate && !token.front().compare(endobj)) {
@@ -563,8 +562,8 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 	RTRegion *RegionUp = NULL, *RegionLo = NULL;
 
 	// Extract frequency from the source
-	double *w_freq = xEsource->GetFrequency_array();
-	int w_size = xEsource->GetFrequency_N();
+	double *w_freq = xEsource->GetWavelength_array();
+	int w_size = xEsource->GetWavelength_N();
 
 	// ************  Check instructions before constructing object ****************
 	//		minium set of required arguments per object
@@ -590,9 +589,6 @@ void ModelBuild::BuildMonitors(vector<InstrSet> vMonitorSet, int Ninst) {
 		// set output file
 		token = Tokenize(Value("FILENAME", vMonitorSet, i, Ninst)); 
 		oFile = token.front() + '_' + file_sufix;
-
-		// Get upper and lower regions
-		token = Tokenize(Value("REGIONS", vMonitorSet, i, Ninst));
 		
 		// get plot type
 		plot_type = Value("PLOT_TYPE", vMonitorSet, i, Ninst);
@@ -679,7 +675,7 @@ string ModelBuild::NewPhotonState(Photon *hw) const {
 		break;
 
 	case HITSMONITOR: // Photon hits a monitor
-		int iw = xEsource->GetFrequency_idx();
+		int iw = xEsource->GetWavelength_idx();
 
 		State = "Photon hits Monitor: " + Monitor[hw->GetMonitorID()]->Label;
 		Monitor[hw->GetMonitorID()]->PhotonDetected(iw, hw);
@@ -698,7 +694,7 @@ string ModelBuild::NewPhotonState(Photon *hw) const {
 
 void ModelBuild::DetectPhotons(Photon *hw){
 	int NumStates = 4;
-	int iw = xEsource->GetFrequency_idx();
+	int iw = xEsource->GetWavelength_idx();
 	string State = "NULL";
 
 	// Determine if photon is closer to monitor[i]
@@ -775,8 +771,8 @@ void ModelBuild::set_wProperties(void) {
 
 	double xtheta = xEsource->GetZenith_val(UNIT_FORMAT);
 	double xphi = xEsource->GetAzimuth_val(UNIT_FORMAT);
-	double w = xEsource->GetFrequency_val();
-	double lambda = xEsource->GetFrequency_val(UNIT_FORMAT);
+	double w = xEsource->GetWavelength_val();
+	double lambda = xEsource->GetWavelength_val(UNIT_FORMAT);
 	const char *Unitlambda = xEsource->wUnit.c_str();
 
 	// Set angle of incidence

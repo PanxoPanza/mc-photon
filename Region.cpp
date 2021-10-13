@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 
 #define EXACT_DIST 0
 #define HG_APPROX  1
@@ -105,12 +105,12 @@ int RTRegion::setProperties(const double &w) {
 
 			// If particle smaller than wavelength set effective media properties
 			if (mie_particle[i].is_opt_properties()) { // if particle has optical properties set
-				fV = NP_volfrac_at(i);							// volume fraction of particle
-				Deff = NP_EffLength_at(i);						// Effective length of particle (um)
-				eps1 = mie_particle[i].get_wEps();				// dielectric constant of particle
-				mu1 = mie_particle[i].get_wMu();				// permeability of particle
-				Nh = sqrt(wEps*wMu);							// refractive index of host
-				lambda = 2 * M_PI*3E14 / (w*Nh.real());			// wavelength in surroundings (um)
+				fV = NP_volfrac_at(i);				// volume fraction of particle
+				Deff = NP_EffLength_at(i);			// Effective length of particle (um)
+				eps1 = mie_particle[i].get_wEps();	// dielectric constant of particle
+				mu1 = mie_particle[i].get_wMu();	// permeability of particle
+				Nh = sqrt(wEps*wMu);				// refractive index of host
+				lambda = w / Nh.real();				// wavelength in surroundings (um)
 				if (Deff < 0.09*lambda) {// if D/lambda << 1 consider particles as effective media
 					wEps = eff_Bruggerman(fV, eps1, wEps);
 					wMu  = eff_Bruggerman(fV,  mu1,  wMu);
@@ -122,9 +122,7 @@ int RTRegion::setProperties(const double &w) {
 
 	// get extinction path
 	double kext = imag(sqrt(wEps*wMu));
-	if (kext > 1E-10) {
-		wExtPath = SPEEDOFLIGHT / (2 * w*kext)*1E6; // in um
-	}
+	if (kext > 1E-10) wExtPath = w/ (4 * M_PI * kext); // in um
 
 	frequency_set = true;
 	frequency = w;
@@ -154,16 +152,7 @@ double RTRegion::NP_sample_path(int &i_np) {
 			NPlength[i] = DBL_MAX;
 		i_particle[i] = i;
 	}
-
-	/*cout << "Unsorted array" << endl;
-	for (int i = 0; i < Num_Inclusions; i++)
-		cout << NPlength[i] << endl;*/
-
 	sort_xy(NPlength, i_particle, sizeof(double), Num_Inclusions - 1);
-
-	/*cout << "Sorted array" << endl;
-	for (int i = 0; i < Num_Inclusions; i++)
-		cout << NPlength[i] << endl;*/
 
 	i_np = (int)i_particle[0]; // return index of particle with shortest path
 	double NP_length_min = NPlength[0];
@@ -220,7 +209,8 @@ double RTRegion::NP_volfrac_at(const int &i) const {
 		ErrorMsg("Index " + to_string(i) + " larger than the number of inclusions in" + Label);
 
 	// Error if index is negative
-	if (i < 0) ErrorMsg("Invalid index at Region " + Label);
+	if (i < 0) 
+		ErrorMsg("Invalid index at Region " + Label);
 
 	// If pass error return the value
 	return mie_particle[i].NPcon*mie_particle[i].NP_Vol;
@@ -236,7 +226,8 @@ double RTRegion::NP_volume_at(const int &i) const {
 		ErrorMsg("Index " + to_string(i) + " larger than the number of inclusions in" + Label);
 
 	// Error if index is negative
-	if (i < 0) ErrorMsg("Invalid index at Region " + Label);
+	if (i < 0) 
+		ErrorMsg("Invalid index at Region " + Label);
 
 	// If pass error return the value
 	return mie_particle[i].NP_Vol;
@@ -252,7 +243,8 @@ double RTRegion::NP_EffLength_at(const int &i) const {
 		ErrorMsg("Index " + to_string(i) + " larger than the number of inclusions in" + Label);
 
 	// Error if index is negative
-	if (i < 0) ErrorMsg("Invalid index at Region " + Label);
+	if (i < 0) 
+		ErrorMsg("Invalid index at Region " + Label);
 
 	// If pass error return the value
 	return mie_particle[i].NP_Leff;
@@ -268,7 +260,8 @@ string RTRegion::NP_label_at(const int &i) const {
 		ErrorMsg("Index " + to_string(i) + " larger than the number of inclusions in" + Label);
 
 	// Error if index is negative
-	if (i < 0) ErrorMsg("Invalid index at Region " + Label);
+	if (i < 0) 
+		ErrorMsg("Invalid index at Region " + Label);
 
 	// If pass error return the value
 	return mie_particle[i].MieFile;
