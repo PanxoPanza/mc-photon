@@ -3,7 +3,7 @@
 #include <string>
 #include <math.h>
 #include "mcphoton_lib.h"
-#include "localmathlib.h"
+//#include "localmathlib.h"
 
 Esource::Esource(int Nhw, 
 	string wfunc, string phifun, string thetafun, string Edistfun) {

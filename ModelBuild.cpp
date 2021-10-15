@@ -4,7 +4,6 @@
 #include <string>
 #include <math.h>
 #include "mcphoton_lib.h"
-//#include "localmathlib.h"
 
 #define UNIT_FORMAT 1
 

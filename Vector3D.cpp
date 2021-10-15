@@ -1,4 +1,4 @@
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 
 //*****  constructor
 Vector3D::Vector3D()

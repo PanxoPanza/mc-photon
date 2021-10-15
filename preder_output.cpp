@@ -1,6 +1,6 @@
 #define _CRT_SECURE_NO_WARNINGS
 #define _USE_MATH_DEFINES
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 
 // a class for standard analysis. It uses the data gathered by the monitors.
 // warning!: this class does not own the monitors and therefore it may not delete the monitors, 

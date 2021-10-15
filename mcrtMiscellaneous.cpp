@@ -3,9 +3,7 @@
 #include <iostream>
 #include <string>
 #include <math.h>
-#include "MCRT_library.h"
-//#include "localmathlib.h"
-//#include "materials.h"
+#include "mcphoton_lib.h"
 
 string CommentOut(string &str) {
 	int i_com;

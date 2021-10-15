@@ -1,5 +1,5 @@
 #define _USE_MATH_DEFINES
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 
 #define EXACT_DIST 0
 #define HG_APPROX  1

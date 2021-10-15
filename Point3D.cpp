@@ -1,4 +1,4 @@
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 // ********************   Point3D class ******************
 Point3D::Point3D()
 {

@@ -49,7 +49,7 @@
 
 #define MAXREFPTS 100
 
-#include "MCRT_library.h"
+#include "mcphoton_lib.h"
 
 /*************************************************************/
 /* Read vtx and panels from a GMSH .msh file to specify */
