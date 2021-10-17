@@ -535,14 +535,23 @@ void ModelBuild::BuildStdoutput(vector<InstrSet> &vMonitorSet, vector<InstrSet> 
 		NumStdOut++;;
 	}
 
-	if (!Value("THREADS", vOutputSet, 0, Ninst).empty()){
+	// Check for number of threads declared on the script
+	if (!Value("THREADS", vOutputSet, 0, Ninst).empty()){ // if the number is fixed
 		nThread = (int)stod(Value("THREADS", vOutputSet, 0, Ninst));
-		if (nThread != 0) omp_set_num_threads(nThread);
-	}
+		if (nThread > omp_get_max_threads()){
+			Log("... SETUP: number of threads exceeds maximum available");
+			nThread = omp_get_max_threads();
+			}
+		}
+	else	// no declaration, use maximum number of threads
+		nThread = omp_get_max_threads();
+	
+	omp_set_num_threads(nThread);
+	Log("... SETUP: setting OpenMP multithreading (%i threads)", nThread);
 	
 	file_sufix = Value("FILE_SUFIX", vOutputSet, 0, Ninst);
 
-	Log("... STANDARD OUTPUT: %i declarations found", NumStdOut);
+	Log("... SETUP: %i STANDARD OUTPUT declarations found", NumStdOut);
 	if (NumStdOut > 0) {
 		std_output = new predef_output*[NumStdOut];
 		for (int i = 0; i < NumStdOut; i++)
