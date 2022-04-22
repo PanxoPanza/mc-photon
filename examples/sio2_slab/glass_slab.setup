@@ -1,0 +1,53 @@
+// ***** Define the regions (Exterior is pre-defined) ***********
+REGION
+	LABEL		glass
+	MATERIAL	CONST_EPS(2.25,0)    // CONST_EPS(REAL_EPS,IMAG_EPS)
+ENDREGION
+
+// **************** Define the surfaces *************************
+SURFACE
+	LABEL	    film
+	REGIONS   EXTERIOR glass
+	GEOMETRY  BOX( 50E3, 50E3, 100) CENTER( 0, 0, -50) // Units in um
+ENDSURFACE
+// **************** Define external source **********************
+ESOURCE
+	N_PHOTONS  		1E5
+	FREQ_RANGE 		linspace(0.3,1.0,100) um // (visible spectrum)
+	THETA	   		0 deg
+	PHI	   		0 deg
+	EFIELD_DIST       CENTER(0,0,0.5)		// source centered at 0.5 um above the film
+ENDESOURCE
+
+// **************** Define ouputs and other variables *************************
+SETUP
+	FILE_SUFIX	glass_slab
+ENDSETUP
+
+// Photons being lost on the edges of the slab
+MONITOR
+	FILENAME 	Edges
+	GEOMETRY 	BOX_ZOPEN( 50000.1, 50000.1, 100) CENTER(0,0, -50)
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Total transmittance
+MONITOR
+	FILENAME 	Ttot
+	GEOMETRY 	FLATSURFACE_Z( 10E5, 10E5) CENTER(0,0, -200)
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Total Reflectance
+MONITOR
+	FILENAME 	Rtot
+	GEOMETRY 	FLATSURFACE_Z( 10E5, 10E5) CENTER(0,0, +100)
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
+
+// Specular transmittance
+MONITOR
+	FILENAME 	Tspec
+	GEOMETRY 	FLATSURFACE_Z( 1E-3, 1E-3) CENTER(0,0, -1E3)
+	PLOT_TYPE 	RADIATION PROPERTIES
+ENDMONITOR
