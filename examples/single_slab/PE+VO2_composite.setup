@@ -24,6 +24,7 @@ ENDESOURCE
 // **************** Define ouputs and other variables *************************
 SETUP
 	FILE_SUFIX	VO2-composite_t73um
+	THREADS		1
 ENDSETUP
 
 // Photons being lost on the edges of the slab

@@ -55,19 +55,15 @@ bool cDataInterpol::GetFromFile(string File, bool is_application_path) {
 		int Ndata;
 
 		// Extract data (cross sections in mm^2)
-		infile >> Ndata;
-
-		//while(!infile.eof()){
-		for (int i = 0; i < Ndata; i++) {
-			if (infile.eof())
-				ErrorMsg("Error! Reach end of file before completing reading of data");
+		while(!infile.eof()){
 
 			infile >> data; xdata.push_back(data);
 			infile >> data; zRe.push_back(data);
 			infile >> data; zIm.push_back(data);
-			//cout << xdata.at(i) << ' ' << zRe.at(i) << ' ' << zIm.at(i) << endl;
+			//cout << xdata.back() << ' ' << zRe.back() << ' ' << zIm.back() << endl;
 		}
 		infile.close();
+		Ndata = xdata.size();
 
 		xBubbleSort(); // sort data in ascending order
 
