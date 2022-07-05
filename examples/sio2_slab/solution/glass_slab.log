@@ -1,0 +1,119 @@
+Fri Apr 22 13:56:36 2022. Setup file found: glass_slab.setup
+Fri Apr 22 13:56:36 2022. Building MC-photon system...
+Fri Apr 22 13:56:36 2022. ... Getting instructions from *.setup file
+Fri Apr 22 13:56:36 2022. ... REGION: 2 objects found
+Fri Apr 22 13:56:36 2022. ... SURFACE: 1 objects found
+Fri Apr 22 13:56:36 2022. ... SOURCE: 100000 photons per frequency
+Fri Apr 22 13:56:36 2022. ... SOURCE: Frequency range, 'linspace(0.3,1.0,100) um '
+Fri Apr 22 13:56:36 2022. ... SOURCE: Theta angle range, '0 deg'
+Fri Apr 22 13:56:36 2022. ... SOURCE: Phi angle range, '0 deg'
+Fri Apr 22 13:56:36 2022. ... SOURCE: Field distribution, 'CENTER(0,0,0.5)		'
+Fri Apr 22 13:56:36 2022. ... SOURCE: object successfully built
+Fri Apr 22 13:56:36 2022. ... SETUP: setting OpenMP multithreading (8 threads)
+Fri Apr 22 13:56:36 2022. ... SETUP: 0 STANDARD OUTPUT declarations found
+Fri Apr 22 13:56:36 2022. ... SETUP: object successfully built
+Fri Apr 22 13:56:36 2022. ... MONITOR: 4 objects found
+Fri Apr 22 13:56:36 2022. ... system successfully built!
+Fri Apr 22 13:56:36 2022. Setting angle of incidence (theta phi) = (  0.00,   0.00) deg
+Fri Apr 22 13:56:36 2022. ... Computing for lambda =   0.300 um
+Fri Apr 22 13:56:36 2022. ... Computing for lambda =   0.307 um
+Fri Apr 22 13:56:36 2022. ... Computing for lambda =   0.314 um
+Fri Apr 22 13:56:37 2022. ... Computing for lambda =   0.321 um
+Fri Apr 22 13:56:37 2022. ... Computing for lambda =   0.328 um
+Fri Apr 22 13:56:37 2022. ... Computing for lambda =   0.335 um
+Fri Apr 22 13:56:38 2022. ... Computing for lambda =   0.342 um
+Fri Apr 22 13:56:38 2022. ... Computing for lambda =   0.349 um
+Fri Apr 22 13:56:39 2022. ... Computing for lambda =   0.357 um
+Fri Apr 22 13:56:39 2022. ... Computing for lambda =   0.364 um
+Fri Apr 22 13:56:40 2022. ... Computing for lambda =   0.371 um
+Fri Apr 22 13:56:40 2022. ... Computing for lambda =   0.378 um
+Fri Apr 22 13:56:40 2022. ... Computing for lambda =   0.385 um
+Fri Apr 22 13:56:41 2022. ... Computing for lambda =   0.392 um
+Fri Apr 22 13:56:41 2022. ... Computing for lambda =   0.399 um
+Fri Apr 22 13:56:42 2022. ... Computing for lambda =   0.406 um
+Fri Apr 22 13:56:42 2022. ... Computing for lambda =   0.413 um
+Fri Apr 22 13:56:43 2022. ... Computing for lambda =   0.420 um
+Fri Apr 22 13:56:43 2022. ... Computing for lambda =   0.427 um
+Fri Apr 22 13:56:44 2022. ... Computing for lambda =   0.434 um
+Fri Apr 22 13:56:44 2022. ... Computing for lambda =   0.441 um
+Fri Apr 22 13:56:44 2022. ... Computing for lambda =   0.448 um
+Fri Apr 22 13:56:45 2022. ... Computing for lambda =   0.456 um
+Fri Apr 22 13:56:45 2022. ... Computing for lambda =   0.463 um
+Fri Apr 22 13:56:46 2022. ... Computing for lambda =   0.470 um
+Fri Apr 22 13:56:46 2022. ... Computing for lambda =   0.477 um
+Fri Apr 22 13:56:47 2022. ... Computing for lambda =   0.484 um
+Fri Apr 22 13:56:47 2022. ... Computing for lambda =   0.491 um
+Fri Apr 22 13:56:48 2022. ... Computing for lambda =   0.498 um
+Fri Apr 22 13:56:49 2022. ... Computing for lambda =   0.505 um
+Fri Apr 22 13:56:49 2022. ... Computing for lambda =   0.512 um
+Fri Apr 22 13:56:50 2022. ... Computing for lambda =   0.519 um
+Fri Apr 22 13:56:50 2022. ... Computing for lambda =   0.526 um
+Fri Apr 22 13:56:51 2022. ... Computing for lambda =   0.533 um
+Fri Apr 22 13:56:51 2022. ... Computing for lambda =   0.540 um
+Fri Apr 22 13:56:52 2022. ... Computing for lambda =   0.547 um
+Fri Apr 22 13:56:52 2022. ... Computing for lambda =   0.555 um
+Fri Apr 22 13:56:53 2022. ... Computing for lambda =   0.562 um
+Fri Apr 22 13:56:53 2022. ... Computing for lambda =   0.569 um
+Fri Apr 22 13:56:54 2022. ... Computing for lambda =   0.576 um
+Fri Apr 22 13:56:54 2022. ... Computing for lambda =   0.583 um
+Fri Apr 22 13:56:54 2022. ... Computing for lambda =   0.590 um
+Fri Apr 22 13:56:55 2022. ... Computing for lambda =   0.597 um
+Fri Apr 22 13:56:55 2022. ... Computing for lambda =   0.604 um
+Fri Apr 22 13:56:56 2022. ... Computing for lambda =   0.611 um
+Fri Apr 22 13:56:56 2022. ... Computing for lambda =   0.618 um
+Fri Apr 22 13:56:57 2022. ... Computing for lambda =   0.625 um
+Fri Apr 22 13:56:57 2022. ... Computing for lambda =   0.632 um
+Fri Apr 22 13:56:58 2022. ... Computing for lambda =   0.639 um
+Fri Apr 22 13:56:58 2022. ... Computing for lambda =   0.646 um
+Fri Apr 22 13:56:59 2022. ... Computing for lambda =   0.654 um
+Fri Apr 22 13:56:59 2022. ... Computing for lambda =   0.661 um
+Fri Apr 22 13:57:00 2022. ... Computing for lambda =   0.668 um
+Fri Apr 22 13:57:00 2022. ... Computing for lambda =   0.675 um
+Fri Apr 22 13:57:01 2022. ... Computing for lambda =   0.682 um
+Fri Apr 22 13:57:01 2022. ... Computing for lambda =   0.689 um
+Fri Apr 22 13:57:02 2022. ... Computing for lambda =   0.696 um
+Fri Apr 22 13:57:02 2022. ... Computing for lambda =   0.703 um
+Fri Apr 22 13:57:03 2022. ... Computing for lambda =   0.710 um
+Fri Apr 22 13:57:03 2022. ... Computing for lambda =   0.717 um
+Fri Apr 22 13:57:04 2022. ... Computing for lambda =   0.724 um
+Fri Apr 22 13:57:04 2022. ... Computing for lambda =   0.731 um
+Fri Apr 22 13:57:05 2022. ... Computing for lambda =   0.738 um
+Fri Apr 22 13:57:05 2022. ... Computing for lambda =   0.745 um
+Fri Apr 22 13:57:06 2022. ... Computing for lambda =   0.753 um
+Fri Apr 22 13:57:06 2022. ... Computing for lambda =   0.760 um
+Fri Apr 22 13:57:07 2022. ... Computing for lambda =   0.767 um
+Fri Apr 22 13:57:07 2022. ... Computing for lambda =   0.774 um
+Fri Apr 22 13:57:08 2022. ... Computing for lambda =   0.781 um
+Fri Apr 22 13:57:08 2022. ... Computing for lambda =   0.788 um
+Fri Apr 22 13:57:09 2022. ... Computing for lambda =   0.795 um
+Fri Apr 22 13:57:09 2022. ... Computing for lambda =   0.802 um
+Fri Apr 22 13:57:10 2022. ... Computing for lambda =   0.809 um
+Fri Apr 22 13:57:10 2022. ... Computing for lambda =   0.816 um
+Fri Apr 22 13:57:11 2022. ... Computing for lambda =   0.823 um
+Fri Apr 22 13:57:11 2022. ... Computing for lambda =   0.830 um
+Fri Apr 22 13:57:12 2022. ... Computing for lambda =   0.837 um
+Fri Apr 22 13:57:12 2022. ... Computing for lambda =   0.844 um
+Fri Apr 22 13:57:13 2022. ... Computing for lambda =   0.852 um
+Fri Apr 22 13:57:13 2022. ... Computing for lambda =   0.859 um
+Fri Apr 22 13:57:14 2022. ... Computing for lambda =   0.866 um
+Fri Apr 22 13:57:14 2022. ... Computing for lambda =   0.873 um
+Fri Apr 22 13:57:15 2022. ... Computing for lambda =   0.880 um
+Fri Apr 22 13:57:15 2022. ... Computing for lambda =   0.887 um
+Fri Apr 22 13:57:16 2022. ... Computing for lambda =   0.894 um
+Fri Apr 22 13:57:16 2022. ... Computing for lambda =   0.901 um
+Fri Apr 22 13:57:17 2022. ... Computing for lambda =   0.908 um
+Fri Apr 22 13:57:17 2022. ... Computing for lambda =   0.915 um
+Fri Apr 22 13:57:18 2022. ... Computing for lambda =   0.922 um
+Fri Apr 22 13:57:18 2022. ... Computing for lambda =   0.929 um
+Fri Apr 22 13:57:19 2022. ... Computing for lambda =   0.936 um
+Fri Apr 22 13:57:20 2022. ... Computing for lambda =   0.943 um
+Fri Apr 22 13:57:20 2022. ... Computing for lambda =   0.951 um
+Fri Apr 22 13:57:21 2022. ... Computing for lambda =   0.958 um
+Fri Apr 22 13:57:22 2022. ... Computing for lambda =   0.965 um
+Fri Apr 22 13:57:23 2022. ... Computing for lambda =   0.972 um
+Fri Apr 22 13:57:23 2022. ... Computing for lambda =   0.979 um
+Fri Apr 22 13:57:24 2022. ... Computing for lambda =   0.986 um
+Fri Apr 22 13:57:24 2022. ... Computing for lambda =   0.993 um
+Fri Apr 22 13:57:25 2022. ... Computing for lambda =   1.000 um
+Fri Apr 22 13:57:25 2022. ... Writting results to file ...
+Fri Apr 22 13:57:25 2022. done with calculations ...
