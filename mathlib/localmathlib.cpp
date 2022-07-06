@@ -206,14 +206,14 @@ std::vector<std::string> Tokenize(std::string str, std::string braket){
 	int w_begin = 0;
 	bool openbraket = false;
 	std::vector<std::string> tokens;
-	const char *lbra = "(", *rbra = ")";
+	char lbra = '(', rbra = ')';
 
 	//std::cout << "Tokenize function" << std::endl;
 	//std::cout << "Text: " << str << std::endl;
 
-	if (!braket.compare("(") || !braket.compare(")")) { lbra = "("; rbra = ")"; }
-	if (!braket.compare("[") || !braket.compare("]")) { lbra = "["; rbra = "]"; }
-	if (!braket.compare("{") || !braket.compare("}")) { lbra = "{"; rbra = "}"; }
+	if (!braket.compare("()")) { lbra = '('; rbra = ')'; }
+	if (!braket.compare("[]")) { lbra = '['; rbra = ']'; }
+	if (!braket.compare("{}")) { lbra = '{'; rbra = '}'; }
 
 	if (str.empty()) {
 		tokens.push_back("");
@@ -222,8 +222,8 @@ std::vector<std::string> Tokenize(std::string str, std::string braket){
 
 	int state = 0;
 	while (i < str.size())	{
-		if (*lbra == str.at(i) && !openbraket) openbraket = true;
-		if (*rbra == str.at(i) &&  openbraket) openbraket = false;
+		if (lbra == str.at(i) && !openbraket) openbraket = true;
+		if (rbra == str.at(i) &&  openbraket) openbraket = false;
 		
 		if (!openbraket && 
 			(' ' == str.at(i) || '\t' == str.at(i) || ',' == str.at(i)))
@@ -260,10 +260,10 @@ std::vector<std::string> EvalFunction(std::string &fName, std::string braket){
 	std::vector<std::string> tokens;
 	std::string arg;
 	std::string lbra, rbra;
-
-	if (!braket.compare("(") || !braket.compare(")")) { lbra = "("; rbra = ")"; }
-	if (!braket.compare("[") || !braket.compare("]")) { lbra = "["; rbra = "]"; }
-	if (!braket.compare("{") || !braket.compare("}")) { lbra = "{"; rbra = "}"; }
+	
+	if (!braket.compare("()")) { lbra = "("; rbra = ")"; }
+	if (!braket.compare("[]")) { lbra = "["; rbra = "]"; }
+	if (!braket.compare("{}")) { lbra = "{"; rbra = "}"; }
 
 	if (fName.find(lbra) > fName.size() || fName.find(rbra) > fName.size()) {
 		tokens.clear();

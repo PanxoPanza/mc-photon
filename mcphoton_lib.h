@@ -287,7 +287,7 @@ class Photon {
 private:
 	// ************** Photon properties *******************************************************************
 	int i_particle;   // index of particle hit by the photon
-	double frequency; // Frequency in (rad/s)
+	double wavelength; // wavelength in (um)
 	Point3D *Position;
 	Vector3D *Momentum;
 	Vector3D *Polarization;
@@ -367,7 +367,7 @@ public:
 	Vector3D k_hat() const;
 	Vector3D e_hat() const;
 	RTRegion* GetRegion() const;
-	double GetFrequency() const;
+	double GetWavelength() const;
 	bool GetQYLoss() const;
 	double GetParticleLength() const;
 	double GetExtLength() const;
@@ -673,6 +673,6 @@ public :
 string CommentOut(string &str); // remove comments from text files
 double RandomGen(char Type, long Seed, long *Status);
 void ErrorMsg(string strError);
-void GetArguments(string strArg, objArgsearch *strSearch, const int &nSearch, string strWhere = "");
+void GetArguments(string strArg, objArgsearch *strSearch, const int &nSearch, string strWhere = "", string braket = "()");
 string check_command_line(int argc, char* argv[]);
 #endif

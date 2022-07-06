@@ -46,7 +46,7 @@ void RTSurface::SetCoating(string strThinFilms) {
 		{"",0,0,0,0}
 	};
 
-	token = Tokenize(strThinFilms);// tokenize layer functions
+	token = Tokenize(strThinFilms,"[]");// tokenize layer functions
 	NumLayers = (int)token.size();
 	matFilm = new Material[NumLayers];
 	tFilm = new double[NumLayers];
@@ -54,8 +54,8 @@ void RTSurface::SetCoating(string strThinFilms) {
 	muFilm = new cdouble[NumLayers];
 
 	for (int i = 0; i < NumLayers; i++) {
-		GetArguments(token.at(i), SurfSet, 1, SurfaceID);// Extract parameters of each layer
-		tFilm[i] = LayerInfo.Val*1E-6;
+		GetArguments(token.at(i), SurfSet, 1, SurfaceID,"[]");// Extract parameters of each layer
+		tFilm[i] = LayerInfo.Val;
 		matFilm[i].SetMaterial(LayerInfo.strfunc);
 		SurfSet->IsFound = false;// Set to false to get next layer
 	}
@@ -165,7 +165,7 @@ void RTSurface::TransferMatrix(const cdouble &kx0, double w, int kz_Dir, string 
 		mu  = muFilm[i];   // relative permeability of the film
 		d = tFilm[i]; // film thickness
 		Ni = sqrt(eps*mu) != 0.0? sqrt(eps*mu) : 1E-15;
-		ki = w*Ni / c0; // wavevector modulus in the film
+		ki = Ni*(cdouble)2*M_PI/w; // wavevector modulus in the film (um^-1)
 		sinTi = kx0 / ki;
 		cosTi = sqrt(1.0 - sinTi*sinTi); // kz component in the film
 
@@ -224,7 +224,7 @@ int RTSurface::FresnelRefraction(const int &idx_from, const int &idx_to, const i
 	}
 
 	// Get input parameters
-	double w = hw.GetFrequency(); // rad/s
+	double w = hw.GetWavelength(); // rad/s
    
     //optical properties medium 1
 	cdouble eps1 = Regions[idx_from]->get_wEps(); 
@@ -257,7 +257,7 @@ int RTSurface::FresnelRefraction(const int &idx_from, const int &idx_to, const i
 
 	cosTi = cosTi != 0.0 ? cosTi : 1E-15; // make cosTi a small number if zero
 	sinTi = sinTi != 0.0 ? sinTi : 1E-15; // make sinTi a small number if zero
-	cdouble kx1 = (n1*w/(double)SPEEDOFLIGHT) *sinTi;
+	cdouble kx1 = n1*sinTi*M_PI/w;
 
 	// Get transmition angles (complex)
 	cdouble sinTt = n1*sinTi / n2; // sin(theta) // Snell's Law

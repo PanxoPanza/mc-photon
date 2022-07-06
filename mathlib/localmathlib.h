@@ -34,8 +34,8 @@ int indexMin(double array[], int size); //Return index of minimum
 double Min(double array[], int size); //Return minimum value
 void sort_xy(double* x, void* y, const int y_size, int x_end, int x_front = 0, bool ascend = true);
 int partition(double* x, void* y, const int y_size, int x_end, int x_front = 0, bool ascend = true);
-std::vector<std::string> Tokenize(std::string str, std::string braket = "(");
-std::vector<std::string> EvalFunction(std::string &fName, std::string braket = "(");
+std::vector<std::string> Tokenize(std::string str, std::string braket = "()");
+std::vector<std::string> EvalFunction(std::string &fName, std::string braket = "()");
 void ErrorMsg(std::string strError);
 cdouble eff_Bruggerman(const double &fV, const cdouble &eps1, const cdouble &eps_host);
 void swap(void* vp1, void* vp2, const int size);

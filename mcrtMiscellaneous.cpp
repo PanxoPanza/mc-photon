@@ -23,7 +23,7 @@ string CommentOut(string &str) {
 
 
 void GetArguments(string strArg, objArgsearch *strSearch, const int &nSearch,
-	string strWhere) {
+	string strWhere, std::string braket) {
 
 	vector<string> args;
 	//bool *state = new bool[nSearch];
@@ -39,14 +39,14 @@ void GetArguments(string strArg, objArgsearch *strSearch, const int &nSearch,
 
 	bool bool_str;
 
-	vstring token = Tokenize(strArg);
+	vstring token = Tokenize(strArg,braket);
 	if (token.size() > nSearch) {
 		ErrorMsg(strWhere + ":  Number of inputs exceeds " + to_string(nSearch));
 		return;
 	}
 
 	for (int i = 0; i < token.size(); i++) {
-		args = EvalFunction(token.at(i));
+		args = EvalFunction(token.at(i),braket);
 
 		for (objlocal = strSearch; !objlocal->Name.empty(); objlocal++) {
 

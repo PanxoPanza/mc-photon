@@ -310,7 +310,7 @@ bool Esource::FirstRun() const {
 	else return false;
 }
 
-// convert the input frequency into microns
+// convert the input wavelength into microns
 void Esource::Convert_wUnits() {
 	for (int iiw = 0; iiw < Nw; iiw++){
 		if      (!wUnit.compare("rad/s")) w[iiw] = 2 * M_PI*SPEEDOFLIGHT / w[iiw] * 1E6;

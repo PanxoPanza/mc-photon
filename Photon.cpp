@@ -13,14 +13,14 @@ Photon::Photon(double w)
 {
 	Initialize();
 	Allocate();
-	frequency = w;
+	wavelength = w;
 }
 
 Photon::Photon(double w, Point3D x)
 {
 	Initialize();
 	Allocate();
-	frequency = w;
+	wavelength = w;
 	SetPosition(x);
 }
 
@@ -28,7 +28,7 @@ Photon::Photon(double w, Point3D x, Vector3D M)
 {
 	Initialize();
 	Allocate();
-	frequency = w;
+	wavelength = w;
 	SetPosition(x);
 	SetMomentum(M);
 }
@@ -37,7 +37,7 @@ Photon::Photon(double w, Point3D x, Vector3D M, Vector3D P)
 {
 	Initialize();
 	Allocate();
-	frequency = w;
+	wavelength = w;
 	SetPosition(x);
 	SetMomentum(M);
 	SetPolarization(P);
@@ -51,7 +51,7 @@ void Photon::Initialize(void)
 	Momentum = NULL;
 	Polarization = NULL;
 	PhotonRegion = NULL;
-	frequency = 0;
+	wavelength = 0;
 	Alive = 1;
 	QYLoss = 0;
 	NumReflects = 0;
@@ -370,8 +370,8 @@ Vector3D Photon::k_LocaltoGlobal(const Vector3D &V)
 }
 
 std::string Photon::Print(void) const {
-	ostringstream Freq, Length[6];
-	Freq << frequency;
+	ostringstream WaveL, Length[6];
+	WaveL << wavelength;
 	Length[0] << dx_Boundary;
 	Length[1] << dx_Surface;
 	Length[2] << dx_Monitor;
@@ -380,7 +380,7 @@ std::string Photon::Print(void) const {
 	Length[5] << TravelPath;
 
 	string outstring = "";
-	outstring += "	Frequency =	" + Freq.str() + " rad/s\n";
+	outstring += "	Wavelength =	" + WaveL.str() + " um\n";
 	outstring += "	Position =	" + Position->Print() + "\n";
 	outstring += "	Momentum =	" + Momentum->Print() + "\n";
 	outstring += "	Polarization =	" + Polarization->Print() + "\n";
@@ -417,8 +417,8 @@ Photon::e_hat() const {
 }
 
 double //Get Wavelength
-Photon::GetFrequency() const {
-	return frequency;
+Photon::GetWavelength() const {
+	return wavelength;
 }
 
 double Photon::GetParticleLength(void) const { return ParticleLength; }
