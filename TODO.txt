@@ -7,6 +7,5 @@
 - take flags from command line
 - take refractive index from nk data (not from eps)
 - get nk from .nk file extention
-- automatically detect eof from nk data
-- SURFACE. Through error if only one region is declared
-- Through errors for wrong declaration in functions
+- SURFACE. Throw an error if only one region is declared
+- Throw errors for wrong declaration in functions
