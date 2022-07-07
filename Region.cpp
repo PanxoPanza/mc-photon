@@ -69,7 +69,7 @@ void RTRegion::Set_Inclusions(string strInst) {
 	is_composite = true;
 
 	// Tokenize strInst to extract all inclusion declariation
-	vector<string> Inst = Tokenize(strInst, "{"); // tokenize by { }
+	vector<string> Inst = Tokenize(strInst, "{}"); // tokenize by { }
 	for (int i = 0; i < Inst.size(); i++) {
 		Inst.at(i) = Inst.at(i).substr(1, Inst.at(i).size() - 2); // remove "{}"
 	}
