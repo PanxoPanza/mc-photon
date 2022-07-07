@@ -224,8 +224,8 @@ int RTSurface::FresnelRefraction(const int &idx_from, const int &idx_to, const i
 	}
 
 	// Get input parameters
-	double w = hw.GetWavelength(); // rad/s
-   
+	double w = hw.GetWavelength(); // um
+	   
     //optical properties medium 1
 	cdouble eps1 = Regions[idx_from]->get_wEps(); 
 	cdouble mu1  = Regions[idx_from]->get_wMu();

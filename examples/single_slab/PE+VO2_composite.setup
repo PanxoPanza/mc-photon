@@ -15,7 +15,7 @@ ENDSURFACE
 // **************** Define external source **********************
 ESOURCE
 	N_PHOTONS  		1E5
-	FREQ_RANGE 		logspace(3.0,15,100) um
+	FREQ_RANGE 		logspace(3.0,15,10) um
 	THETA	   		0 deg
 	PHI	   			0 deg
 	EFIELD_DIST   	CENTER(0,0,0.5)
