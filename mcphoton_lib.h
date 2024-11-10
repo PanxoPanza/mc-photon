@@ -621,6 +621,7 @@ public:
 class ModelBuild {
 private:
 	int nThread;
+	int max_reflect;
 	RTMonitor **Monitor;
 	RTRegion **Region;
 	RTSurface **Surface;
@@ -651,6 +652,7 @@ private:
 
 public :
 	double meantest;
+	bool debug_mode;
 
 	ModelBuild(string setupfile);
 	~ModelBuild();

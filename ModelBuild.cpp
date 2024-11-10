@@ -27,6 +27,8 @@ ModelBuild::~ModelBuild() {
 
 void ModelBuild::Initiallize(void) {
 	nThread = 0;
+	max_reflect = MAX_REFLECTION;
+	debug_mode = false;
 	Monitor = NULL;
 	Region = NULL;
 	Surface = NULL;
@@ -182,6 +184,8 @@ void ModelBuild::InputSetup(string setupfile) {
 		{"RADIATION_PROP"	, 0, 1, "" },
 		{"THREADS"			, 0, 1, "" },
 		{"FILE_SUFIX"		, 0, 1, "" },
+		{"MAX_REFLECTION"	, 0, 1, "" },
+		{"DEBUG_MODE"	    , 0, 1, "" },
 		{"", 0, 0, ""}
 	};
 
@@ -549,6 +553,26 @@ void ModelBuild::BuildStdoutput(vector<InstrSet> &vMonitorSet, vector<InstrSet> 
 	omp_set_num_threads(nThread);
 	Log("... SETUP: setting OpenMP multithreading (%i threads)", nThread);
 	
+	// Check for number of maximum scattering or reflection events
+	if (!Value("MAX_REFLECTION", vOutputSet, 0, Ninst).empty()){ // if the number is fixed
+		max_reflect = (int)stod(Value("MAX_REFLECTION", vOutputSet, 0, Ninst));
+	}
+	Log("... SETUP: setting maximum internal scattering/reflection events to %i", max_reflect);
+
+	// Check if code is run on debug mode
+	if (!Value("DEBUG_MODE", vOutputSet, 0, Ninst).empty()){
+		int debug_out = (int)stod(Value("DEBUG_MODE", vOutputSet, 0, Ninst));
+		if (debug_out == 1){
+			debug_mode = true;
+			Log("... SETUP: running on debug mode");
+		}
+		else if(debug_out != 0){
+			Log("... SETUP: DEBUG_MODE must be 0 or 1. Ignoring instruction");
+
+		}
+	}
+
+	// Set output files name (or sufix)
 	file_sufix = Value("FILE_SUFIX", vOutputSet, 0, Ninst);
 
 	Log("... SETUP: %i STANDARD OUTPUT declarations found", NumStdOut);
@@ -730,8 +754,8 @@ bool ModelBuild::IsPhotonTrapped(Photon *hw, const int IsReflected) const
 		string newRegionLabel = hw->GetRegion()->Label;
 		if (hw->NumReflects > 0 && newRegionLabel.compare(hw->oldRegionLabel) == 0) {
 			hw->NumReflects++;
-			hw->oldRegionLabel = newRegionLabel; // record region
-			if (hw->NumReflects > MAX_REFLECTION) { // consecutive internal reflections or scattering events
+			hw->oldRegionLabel = newRegionLabel;    // record region
+			if (hw->NumReflects > max_reflect) { // consecutive internal reflections or scattering events
 				hw->NumReflects = 0;
 				return true;
 			}

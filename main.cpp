@@ -5,7 +5,7 @@
 
 ofstream debug_file;
 double w;
-bool debug = false;
+bool debug;
 /************************************* Main Code **********************************/
 int main(int argc, char* argv[])
 {
@@ -13,9 +13,12 @@ int main(int argc, char* argv[])
 
 	string ModelBuild_file = check_command_line(argc, argv);
 	ModelBuild Setup(ModelBuild_file);
+	debug = Setup.debug_mode;
 
-	if (debug) debug_file.open("debug_file.txt");
-	if (debug) omp_set_num_threads(1);
+	if (debug) {
+		debug_file.open("debug_file.txt");
+		omp_set_num_threads(1);
+	}
 
 	srand(10);
 	while (Setup.RunSimulation()) {
